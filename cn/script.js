@@ -6,5 +6,6 @@ for (const ele in pros) {
     btns[ele].addEventListener('click',()=>{
     navigator.clipboard.writeText(pros[ele].textContent);
     alert("Copied : " +pros[ele].textContent)
+    console.log(pros[ele])
 })
 }
