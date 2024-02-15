@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C#</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./pngegg.png">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="head">C#</div>
+
+<!-- 1 -->
+        <div class="code">
+            <p class="text-size">1. C# program to simulate simple arithmetic calculator for Addition, Subtraction, Multiplication,
+                Division and Mod operations. Read the operator and operands through console</p>
+            <pre class="pro1">              
+
+using System;
+namespace CalculatorProgram
+{
+    class Calculator
+    {
+        static void Main()
+        {
+            Console.WriteLine("Simple Arithmetic Calculator");
+            Console.WriteLine("Supported Operations: +, -, *, /, %");
+            // Read operator and operands from the console
+            Console.Write("Enter operator: ");
+            char operatorSymbol = Convert.ToChar(Console.ReadLine());
+            Console.Write("Enter operand 1: ");
+            double operand1 = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Enter operand 2: ");
+            double operand2 = Convert.ToDouble(Console.ReadLine());
+            // Perform the requested operation
+            double result = 0;
+            switch (operatorSymbol)
+            {
+                case '+':
+                    result = operand1 + operand2;
+                    break;
+                case '-':
+                    result = operand1 - operand2;
+                    break;
+                case '*':
+                    result = operand1 * operand2;
+                    break;
+                case '/':
+                    // Check for division by zero
+                    if (operand2 != 0)
+                    {
+                        result = operand1 / operand2;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error: Division by zero is not allowed.");
+                        return;
+                    }
+                    break;
+                case '%':
+                    // Check for modulus by zero
+                    if (operand2 != 0)
+                    {
+                        result = operand1 % operand2;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error: Modulus by zero is not allowed.");
+                        return;
+                    }
+                    break;
+                default:
+                    Console.WriteLine("Error: Invalid operator.");
+                    return;
+            }
+            // Display the result
+            Console.WriteLine($"Result: {operand1} {operatorSymbol} {operand2} = {result}");
+        }
+    }
+}
+
+
+                </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div>
+
+        <!-- 2 -->
+        <div class="code">
+            <p class="text-size">2. C# program to print Armstrong Number between 1 to 1000. </p>
+            <pre class="pro1">
+                using System;
+class Program
+{
+    static void Main()
+    {
+        int a, b, c, d;
+        Console.WriteLine("Armstrong numbers between 1 to 1000 are:");
+        for (int i = 1; i <= 1000; i++)
+        {
+            a = i / 100;
+            b = (i - a * 100) / 10;
+            c = (i - a * 100 - b * 10);
+            d = a * a * a + b * b * b + c * c * c;
+            if (i == d)
+            {
+                System.Console.WriteLine("{0}", i);
+            }
+        }
+        Console.Read();
+    }
+}
+                
+                </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div>
+
+        
+
+<!-- 3 -->
+        <div class="code">
+            <p class="text-size">3. C# program to list all substrings in a given string. [ Hint: use of Substring() method] </p>
+            <pre class="pro1">
+using System;
+namespace LogicalPrograms {
+  class Program 
+  {
+    static void Main(string[] args) 
+    {
+      Console.Write("Enter a String : ");
+      string inputString = Console.ReadLine();
+      int len = inputString.Length;
+      Console.WriteLine("All substrings for given string are : ");
+      // This loop maintains the starting character
+      for (int i = 0; i < len; i++) {
+        // This loop adds the next character every iteration for the substring
+        // and then print
+        for (int j = 0; j < len - i; j++) {
+          Console.WriteLine(inputString.Substring(i, j + 1) + " ");
+        }
+        Console.WriteLine();
+      }
+      Console.ReadKey();
+    }
+  }
+}
+               </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div>
+
+        <!-- 4 -->
+        <div class="code">
+            <p class="text-size">  4.C# program to demonstrate Division by Zero and Index Out of Range exceptions.  </p>
+            <pre class="pro1">
+using System;
+class Program
+{
+  static void Main()
+  {
+    // Division by Zero Exception
+    try {
+      int numerator = 10;
+      int denominator = 0;
+      int result = numerator / denominator; // This line will throw an exception
+      Console.WriteLine($"Result of division: {result}");
+    } catch (DivideByZeroException ex) {
+      Console.WriteLine($"Division by zero exception: {ex.Message}");
+    }
+    // Index Out of Range Exception
+    try {
+      int[] numbers = { 1, 2, 3, 4, 5 };
+      int index = 10;             // Accessing an index that is out of range
+      int value = numbers[index]; // This line will throw an exception
+      Console.WriteLine($"Value at index {index}: {value}");
+    } catch (IndexOutOfRangeException ex) {
+      Console.WriteLine($"Index out of range exception: {ex.Message}");
+    }
+    Console.ReadLine();
+  }
+}
+                
+                </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div>
+
+                <!-- 5 -->
+        <div class="code">
+            <p class="text-size"> 5.Pascal Triangle</p>
+            <pre class="pro1">
+using System;
+ class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the number of rows for pascal's Triangle");
+            int numRows = int.Parse(Console.ReadLine());
+
+            int[,] pascalTriangle = generatePascalTriangle(numRows);
+
+            printPascalTriangle(pascalTriangle);
+        }
+
+        static int[,] generatePascalTriangle(int numRows)
+        {
+            int[,] triangle = new int[numRows,numRows];
+
+            for (int i = 0; i < numRows; i++)
+            {
+                triangle[i,0] = 1;
+
+                for (int j = 1; j <= i; j++)
+                {
+                    triangle[i,j] = triangle[i-1,j-1] + triangle[i-1,j];
+                }
+            }
+
+            Console.WriteLine(triangle);
+            return triangle;
+        }
+
+        static void printPascalTriangle(int [,] triangle)
+        {
+            int numRows = triangle.GetLength(0);
+
+            for (int i = 0;i < numRows; i++)
+            {
+                for (int j = 0; j < numRows - i - 1; j++) {
+
+
+                    Console.Write(" ");
+                }
+
+
+                for (int k = 0; k <= i; k++)
+                {
+
+                    Console.Write($" {triangle[i, k]}");
+                }
+                Console.WriteLine();
+            }
+        }
+
+    }
+                </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div>
+
+        <!-- 6 -->
+        <div class="code">
+            <p class="text-size"> 6. FloydsTriangle.  </p>
+            <pre class="pro1">
+ using System;
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Enter the number of rows for Floyd's Triangle: ");
+        int numRows = int.Parse(Console.ReadLine());
+        int[][] floydsTriangle = generateFloydsTriangle(numRows);
+        Console.WriteLine("Floyds triangle : ");
+        printFloydsTriangle(floydsTriangle);
+        Console.ReadLine();
+    }
+
+    static int[][] generateFloydsTriangle(int numRows)
+    {
+        int[][] triangle = new int[numRows][];
+        int count = 1;
+        for (int i = 0; i < numRows; i++)
+        {
+            triangle[i] = new int[i + 1];
+            for (int j = 0; j <= i; j++)
+                triangle[i][j] = count++;
+        }
+        return triangle;
+    }
+
+    static void printFloydsTriangle(int[][] triangle)
+    {
+        int numRows = triangle.Length;
+        for (int i = 0; i < numRows; i++)
+        {
+            for (int j = 0; j < triangle[i].Length; j++)
+                Console.Write(triangle[i][j] + " ");
+            Console.WriteLine();
+        }
+    }
+}
+
+                
+                </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div>
+
+        <!-- 7 -->
+        <div class="code">
+            <p class="text-size"> 7. C# program to read a text file and copy the file content to another text file.  </p>
+            <pre class="pro1">
+ using System;
+using System.IO;
+
+class program
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter the path of the source tect file:");
+        String sourceFilePath = Console.ReadLine();
+
+        Console.WriteLine("Enter the path of the destination text file: ");
+        String destinationFilePath = Console.ReadLine();
+
+        try
+        {
+            String[] lines = File.ReadAllLines(sourceFilePath);
+
+            File.WriteAllLines(destinationFilePath, lines);
+
+            Console.WriteLine("File contents copied successfully.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occured: {ex.Message}");
+        }
+    }
+}
+
+
+//create two file {sourceFilePath.txt, destinationFilePath.txt}
+
+                
+                </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div>
+
+        <!-- 8 -->
+        <div class="code">
+            <p class="text-size">8.Stack Operations  </p>
+            <pre class="pro1">
+ using System;
+
+class StackImplementation
+{
+    class Stack
+    {
+        private const int MAX_SIZE = 10;
+        private int[] array;
+        private int top;
+
+        public Stack()
+        {
+            array = new int[MAX_SIZE];
+            top = -1;
+        }
+
+        public void Push(int value)
+        {
+            if (top >= MAX_SIZE - 1)
+            {
+                Console.WriteLine("Stack Overflow - Cannont push more elements.");
+            }
+            else
+            {
+                array[++top] = value;
+                Console.WriteLine($"Pushed {value} onto the stack.");
+            }
+        }
+        public int Pop()
+        {
+            if (top < 0)
+            {
+                Console.WriteLine("Stack Underflow - Cannont pop from an empty stack.");
+                return -1;
+            }
+            else
+            {
+                int poppedValue = array[top--];
+                Console.WriteLine($"Popped {poppedValue} from the stack.");
+                return poppedValue;
+            }
+        }
+        public void PrintStack()
+        {
+            if (top < 0)
+            {
+                Console.WriteLine("Stack is empty.");
+            }
+            else
+            {
+                Console.WriteLine("Current Stack: ");
+                for (int i = 0; i <= top; i++)
+                {
+                    Console.WriteLine(array[i] + " ");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+
+    static void Main()
+    {
+        Stack stack = new Stack();
+
+        stack.Push(10);
+        stack.Push(20);
+        stack.Push(30);
+
+        stack.PrintStack();
+
+        int poppedValue = stack.Pop();
+        Console.WriteLine($"Popped Value: {poppedValue}");
+
+        stack.PrintStack();
+    }
+}
+                
+                </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div>
+
+        <!-- 10 -->
+        <div class="code">
+            <p class="text-size"> 10. C# program to create a class named shape.  </p>
+            <pre class="pro1">
+ 
+ using System;
+    class Shape
+    {
+        public virtual void Draw()
+        {
+            Console.WriteLine("Drawing a generic shape");
+        }
+        public virtual void Erase() {
+            Console.WriteLine("Erasing the generic shape");
+        }
+       
+    }
+
+    class Circle : Shape
+    {
+        public override void Draw ()
+        {
+            Console.WriteLine("Drawing a circle");
+        }
+        public override void Erase ()
+        {
+            Console.WriteLine("Erasing a circle");
+        }
+    }
+
+    class Triangle : Shape
+    {
+        public override void Draw()
+        {
+            Console.WriteLine("Drawing a Triangle");
+        }
+        public override void Erase()
+        {
+            Console.WriteLine("Erasing a Triangle");
+        }
+    }
+
+    class Square : Shape
+    {
+        public override void Draw()
+        {
+            Console.WriteLine("Drawing a Square");
+        }
+        public override void Erase()
+        {
+            Console.WriteLine("Erasing a Square");
+        }
+    }
+
+    class program
+    {
+        static void Main(string[] args)
+        {
+            Shape circle = new Circle();
+            Shape triangle = new Triangle();    
+            Shape square = new Square();
+            Console.WriteLine("Demonstrating polymorphism : ");
+            DrawAndErase(circle);
+            DrawAndErase(triangle);
+            DrawAndErase(square);
+        }
+
+        static void DrawAndErase(Shape shape)
+        {
+            shape.Draw();
+            shape.Erase();
+            Console.WriteLine();
+        }
+
+    }  
+                </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div>
+
+
+<!-- 
+        <div class="code">
+            <p class="text-size">  C# program to demonstrate Division by Zero and Index Out of Range exceptions.  </p>
+            <pre class="pro1">
+ 
+                
+                </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div>
+
+        <div class="code">
+            <p class="text-size">  C# program to demonstrate Division by Zero and Index Out of Range exceptions.  </p>
+            <pre class="pro1">
+ 
+                
+                </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div>
+
+        <div class="code">
+            <p class="text-size">  C# program to demonstrate Division by Zero and Index Out of Range exceptions.  </p>
+            <pre class="pro1">
+ 
+                
+                </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div>
+
+        <div class="code">
+            <p class="text-size"> C# program to print Armstrong Number between 1 to 1000. </p>
+            <pre class="pro1">
+ 
+                
+                </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div> -->
+
+
+        <!-- 2 diff -->
+        <div class="code">
+            <p class="text-size">2.C# program to print Armstrong Number between 1 to 1000. </p>
+            <pre class="pro1">
+using System;
+ internal class Program
+{
+    public static void armstrong1_100()
+    {
+        for (int i = 1; i <= 1000; i++)
+        {
+            int num = i, rem, sum = 0;
+            while (num > 0)
+            {
+                rem = num % 10;
+                sum += rem * rem * rem;
+                num = num / 10;
+            }
+            if (sum == i)
+                Console.WriteLine("{0} is Armstrong no",i);
+        }
+    }
+
+    public static void armstrongCheck()
+    {
+        Console.WriteLine("Enter number to check Armstrong");
+        int num = Convert.ToInt32(Console.ReadLine());
+        int temp = num;
+        int rem, sum = 0;
+        while (num > 0)
+        {
+            rem = num % 10;
+            sum += rem * rem * rem;
+            num = num / 10;
+        }
+        if (sum == temp)
+            Console.WriteLine("{0} is Armstrong no", temp);
+        else
+            Console.WriteLine("{0} Not a Armstrong no", temp);
+    }
+
+    public static void Main(string[] args)
+    {
+
+        armstrong1_100();
+        armstrongCheck();
+        
+    }
+}
+                </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div>
+
+
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
