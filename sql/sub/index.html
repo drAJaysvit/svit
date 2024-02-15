@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Computer Network</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+
+<body>
+    <div class='wrapper'>
+        <div class='head'>Exercise-1: A.</div>
+        <!-- Computer Network -->
+
+        <img src='./Image_012.jpg' alt=''>
+        <!-- <div class='cn'> -->
+        <!-- publisher -->
+        <div class='code'>
+            <p class='text-size'>publisher</p>
+
+            <pre class='pro1'>
+create table publisher(
+  name varchar2(10) primary key, 
+  address varchar2(20), 
+  phone number(10)
+);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <div class='code'>
+            <pre class='pro1'>
+insert into publisher values ('php','blore',9215673151);
+insert into publisher values ('phi','mysore',9215673152);
+insert into publisher values ('harper','blore',9215673153);
+insert into publisher values ('wiley','chennai',9215673154);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- book -->
+        <div class='code'>
+            <p class='text-size'>book</p>
+            <pre class='pro1'>
+create table book(
+  book_id varchar2(5) primary key, 
+  title varchar2(15) not null, 
+  publisher_name varchar2(10) references publisher(name), 
+  pub_year number(5)
+) partition by range(pub_year) (
+  partition p1 
+  values 
+    less than (2014), 
+    partition p2 
+  values 
+    less than (2015), 
+    partition p3 
+  values 
+    less than (2016), 
+    partition p4 
+  values 
+    less than (2017), 
+    partition p5 
+  values 
+    less than (MAXVALUE)
+);
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+insert into book values ('b1','ada','php',2014);
+insert into book values ('b2','c++','phi',2015);
+insert into book values ('b3','dbms','harper',2016);
+insert into book values ('b4','java','wiley',2017);
+insert into book values ('b5','c','sapna',2017);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- book_authors -->
+        <div class='code'>
+            <p class='text-size'>book_authors</p>
+            <pre class='pro1'>
+create table book_authors(
+  book_id varchar2(5) references book(book_id) on delete cascade, 
+  author_name varchar2(20), 
+  primary key(book_id)
+);
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+insert into book_authors values ('b1','padmareddy');
+insert into book_authors values ('b2','balaguru');
+insert into book_authors values ('b3','navathe');
+insert into book_authors values ('b4','herbashild');
+insert into book_authors values ('b5','ritchie');
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- library_branch -->
+        <div class='code'>
+            <p class='text-size'>library_branch</p>
+            <pre class='pro1'>
+create table library_branch(
+  branch_id varchar2(5) primary key, 
+  branch_name varchar2(15) not null, 
+  address varchar2(20)
+);
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+insert into library_branch values ('br11','jayanagar','blore');
+insert into library_branch values ('br12','btmlayout','blore');
+insert into library_branch values ('br13','hebbal','blore');
+insert into library_branch values ('br14','rtnagar','blore');
+insert into library_branch values ('br15','rajajinagar','blore');
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- book_copies -->
+        <div class='code'>
+            <p class='text-size'>book_copies</p>
+            <pre class='pro1'>
+create table book_copies(
+  book_id varchar2(5) references book(book_id) on delete cascade, 
+  branch_id varchar2(5) references library_branch(branch_id), 
+  no_of_copies number(4), 
+  primary key(book_id, branch_id)
+);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+insert into book_copies values ('b1','br11',10);
+insert into book_copies values ('b1','br12',20);
+insert into book_copies values ('b2','br12',50);
+insert into book_copies values ('b2','br13',40);
+insert into book_copies values ('b2','br14',10);
+insert into book_copies values ('b3','br14',15);
+insert into book_copies values ('b3','br15',10);
+insert into book_copies values ('b4','br11',40);
+insert into book_copies values ('b4','br12',10);
+insert into book_copies values ('b4','br15',15);
+insert into book_copies values ('b5','br14',15);
+insert into book_copies values ('b5','br13',12);
+insert into book_copies values ('b5','br12',10);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- book_lending -->
+        <div class='code'>
+            <p class='text-size'>book_lending</p>
+            <pre class='pro1'>
+create table book_lending(
+  book_id varchar2(5) references book(book_id) on delete cascade, 
+  branch_id varchar2(5) references library_branch(branch_id), 
+  card_no number(4), 
+  date_out date, 
+  due_date date, 
+  primary key(book_id, branch_id, card_no)
+);
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+insert into book_lending values ('b1','br11','c1','01-JAN-17','30-JAN-17');
+insert into book_lending values ('b2','br13','c2','01-FEB-17','28-FEB-17');
+insert into book_lending values ('b1','br12','c3','05-MAR-17','28-MAR-17');
+insert into book_lending values ('b2','br12','c3','06-APR-17','30-APR-17');
+insert into book_lending values ('b4','br12','c3','10-MAY-17','30-MAY-17');
+insert into book_lending values ('b5','br12','c3','10-FEB-17','02-MAR-17');
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+<!-- Q1 -->
+        <div class='code'>
+            <p class='text-size'>1.Retrieve details of all books in the library – id, title, name of publisher, authors, number of copies in each branch, etc.
+
+            </p>
+            <pre class='pro1'>
+select 
+  b.book_id, 
+  b.title, 
+  b.publisher_name, 
+  ba.author_name, 
+  l.branch_id, 
+  l.branch_name, 
+  bc.no_of_copies 
+from 
+  book b, 
+  book_authors ba, 
+  book_copies bc, 
+  library_branch l 
+where 
+  b.book_id = ba.book_id 
+  and b.book_id = bc.book_id 
+  and bc.branch_id = l.branch_id;
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+<!-- Q2 -->
+        <div class='code'>
+            <p class='text-size'>2.Get the particulars of borrowers who have borrowed more than 3 books, but from Jan 2017 to Jun 2017.</p>
+            <pre class='pro1'>
+select 
+  card_no, 
+  count(book_id) 
+from 
+  book_lending 
+where 
+  date_out between '01-jan-2017' 
+  and '30-jun-2017' 
+group by 
+  card_no 
+having 
+  count(book_id)> 3;
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+<!-- Q3 -->
+<div class='code'>
+    <p class='text-size'>3.Delete a book in BOOK table. Update the contents of other tables to reflect this data manipulation operation.</p>
+    <pre class='pro1'>
+delete from book where book_id='b1'; 
+        </pre>
+    <div class='copy-code-btn btn1'></div>
+</div>
+<div class='code'>
+    <pre class='pro1'>
+select *from book;
+
+        </pre>
+    <div class='copy-code-btn btn1'></div>
+</div>
+
+<!-- Q4 -->
+<div class='code'>
+            <p class='text-size'>4.Partition the BOOK table based on year of publication. Demonstrate its working with a simple query. Book table partioned into 5 partions as p1,p2,p3,p4,p5 while creating the table.</p>
+            <pre class='pro1'>
+select 
+  * 
+from 
+  book1 partition (p4);
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+select 
+  * 
+from 
+  book1 partition (p5);
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+select 
+  * 
+from 
+  book1 partition (p5) 
+where 
+  title = 'c';
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+<!-- Q5 -->
+        <div class='code'>
+            <p class='text-size'>5.Create a view of all books and its number of copies that are currently available in the Library.</p>
+            <pre class='pro1'>
+create view branch_book_count(
+  book_id, title, branch_id, branch_name, 
+  no_of_copies
+) as 
+select 
+  b.book_id, 
+  b.title, 
+  l.branch_id, 
+  l.branch_name, 
+  bc.no_of_copies 
+from 
+  book b, 
+  book_copies bc, 
+  library_branch l 
+where 
+  b.book_id = bc.book_id 
+  and bc.branch_id = l.branch_id;
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+
+
+        <!-- <div class='code'>
+            <pre class='pro1'>
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <p class='text-size'>Bellman-Ford Algorithm</p>
+            <pre class='pro2'>
+                        import java.io.*;
+                        import java.util.Scanner;
+                        
+                        class dist_vec {
+                            public static void main(String args[]) {
+                                int dmat[][];
+                        
+                                int dist[][];
+                                int via[][];
+                                int n = 0, i = 0, j = 0, k = 0, count = 0;
+                                Scanner in = new Scanner(System.in);
+                                System.out.println('enter the number of nodes\n');
+                                n = in.nextInt();
+                                dmat = new int[n][n];
+                                dist = new int[n][n];
+                                via = new int[n][n];
+                                System.out.println('enter the cost matrix\n');
+                                for (i = 0; i < n; i++)
+                                    for (j = 0; j < n; j++) {
+                                        dmat[i][j] = in.nextInt();
+                                        dmat[i][i] = 0;
+                                        dist[i][j] = dmat[i][j];
+                                        via[i][j] = j;
+                                    }
+                                do {
+                                    count = 0;
+                                    for (i = 0; i < n; i++)
+                                        for (j = 0; j < n; j++)
+                                            for (k = 0; k < n; k++)
+                                                if (dist[i][j] > dmat[i][k] + dist[k][j]) {
+                                                    dist[i][j] = dist[i][k] + dist[k][j];
+                                                    via[i][j] = k;
+                                                    count++;
+                                                }
+                                } while (count != 0);
+                                for (i = 0; i < n; i++) {
+                                    System.out.println('state value for router' + i + ' is');
+                                    for (j = 0; j < n; j++) {
+                                        System.out.println('To ' + j + ' -Via ' + via[i][j] +
+                                                ' distance is ' + dist[i][j]);
+                                    }
+                                }
+                            }
+                        }
+                        
+                </pre>
+            <div class='copy-code-btn btn2'></div>
+        </div> -->
+
+
+        
+    </div>
+    <script src='script.js'></script>
+</body>
+
+</html>
