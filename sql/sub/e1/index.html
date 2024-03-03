@@ -35,6 +35,7 @@ insert into publisher values ('php',9215673151,'blore');
 insert into publisher values ('phi',9215673152,'mysore');
 insert into publisher values ('harper',9215673153,'blore');
 insert into publisher values ('wiley',9215673154,'chennai');
+insert into publisher values ('sapna',9215673155,'pune');
                 </pre>
             <div class='copy-code-btn btn1'></div>
         </div>
@@ -49,21 +50,11 @@ create table book(
   publisher_name varchar2(10) references publisher(name), 
   pub_year number(5)
 ) partition by range(pub_year) (
-  partition p1 
-  values 
-    less than (2014), 
-    partition p2 
-  values 
-    less than (2015), 
-    partition p3 
-  values 
-    less than (2016), 
-    partition p4 
-  values 
-    less than (2017), 
-    partition p5 
-  values 
-    less than (MAXVALUE)
+  partition p1 values less than (2014), 
+  partition p2 values less than (2015), 
+  partition p3 values less than (2016), 
+  partition p4 values less than (2017), 
+  partition p5 values less than (MAXVALUE)
 );
 
                 </pre>
