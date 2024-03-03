@@ -158,7 +158,7 @@ insert into book_copies values ('b5','br12',10);
 create table book_lending(
   book_id varchar2(5) references book(book_id) on delete cascade, 
   branch_id varchar2(5) references library_branch(branch_id), 
-  card_no number(4), 
+  card_no int, 
   date_out date, 
   due_date date, 
   primary key(book_id, branch_id, card_no)
@@ -227,21 +227,32 @@ having
             <div class='copy-code-btn btn1'></div>
         </div>
 
-<!-- Q3 -->
+<!-- Q5 -->
 <div class='code'>
-    <p class='text-size'>3.Delete a book in BOOK table. Update the contents of other tables to reflect this data manipulation operation.</p>
-    <pre class='pro1'>
-delete from book where book_id='b1'; 
-        </pre>
-    <div class='copy-code-btn btn1'></div>
-</div>
-<div class='code'>
-    <pre class='pro1'>
-select *from book;
+  <p class='text-size'>5.Create a view of all books and its number of copies that are currently available in the Library.</p>
+  <pre class='pro1'>
+create view branch_book_count(
+book_id, title, branch_id, branch_name, 
+no_of_copies
+) as 
+select 
+b.book_id, 
+b.title, 
+l.branch_id, 
+l.branch_name, 
+bc.no_of_copies 
+from 
+book b, 
+book_copies bc, 
+library_branch l 
+where 
+b.book_id = bc.book_id 
+and bc.branch_id = l.branch_id;
 
-        </pre>
-    <div class='copy-code-btn btn1'></div>
+      </pre>
+  <div class='copy-code-btn btn1'></div>
 </div>
+
 
 <!-- Q4 -->
 <div class='code'>
@@ -278,31 +289,21 @@ where
             <div class='copy-code-btn btn1'></div>
         </div>
 
-<!-- Q5 -->
-        <div class='code'>
-            <p class='text-size'>5.Create a view of all books and its number of copies that are currently available in the Library.</p>
-            <pre class='pro1'>
-create view branch_book_count(
-  book_id, title, branch_id, branch_name, 
-  no_of_copies
-) as 
-select 
-  b.book_id, 
-  b.title, 
-  l.branch_id, 
-  l.branch_name, 
-  bc.no_of_copies 
-from 
-  book b, 
-  book_copies bc, 
-  library_branch l 
-where 
-  b.book_id = bc.book_id 
-  and bc.branch_id = l.branch_id;
+<!-- Q3 -->
+<div class='code'>
+  <p class='text-size'>3.Delete a book in BOOK table. Update the contents of other tables to reflect this data manipulation operation.</p>
+  <pre class='pro1'>
+delete from book where book_id='b1'; 
+      </pre>
+  <div class='copy-code-btn btn1'></div>
+</div>
+<div class='code'>
+  <pre class='pro1'>
+select *from book;
 
-                </pre>
-            <div class='copy-code-btn btn1'></div>
-        </div>
+      </pre>
+  <div class='copy-code-btn btn1'></div>
+</div>
 
 
 
