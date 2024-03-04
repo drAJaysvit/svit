@@ -202,16 +202,13 @@ INSERT INTO works_on VALUES (1006, 11, 3);
             </p>
             <pre class='pro1'>
 SELECT DISTINCT p.pno 
-FROM project p
-JOIN department d ON d.dno = p.dno
-JOIN employee e ON d.mgrssn = e.ssn
-WHERE e.name LIKE '%ramya'
+FROM project p, department d, employee e 
+WHERE d.dno = p.dno AND mgrssn = ssn AND name LIKE '%ramya'
 UNION 
 SELECT DISTINCT p.pno 
-FROM project p
-JOIN works_on w ON p.pno = w.pno
-JOIN employee e ON w.ssn = e.ssn
-WHERE e.name LIKE '%ramya';              </pre>
+FROM project p, works_on w, employee e 
+WHERE p.pno = w.pno AND w.ssn = e.ssn AND name LIKE '%ramya'
+;              </pre>
             <div class='copy-code-btn btn1'></div>
         </div>
 <!-- Q2 -->
