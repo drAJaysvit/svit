@@ -224,9 +224,9 @@ select
   sub.title,
   i.test1
 from
-  student3 s,
-  iamarks3 i,
-  subject3 sub
+  student s,
+  iamarks i,
+  subject sub
 where
   s.usn = i.usn
   and i.subcode = sub.subcode
@@ -243,7 +243,7 @@ select *from TEST1_MARKS_OF_1bi15cs101;
             <p class='text-size'>4.Calculate the FinalIA (average of best two test marks) and update the corresponding table for all students.</p>
             <pre class='pro1'>
 update
-  iamarks3
+  iamarks
 set
   finalia = case when (
     test1 < test2
@@ -259,7 +259,7 @@ set
     (test1 + test2)/ 2
   ) end;
 
-select *from iamarks3;
+select *from iamarks;
                 </pre>
             <div class='copy-code-btn btn1'></div>
         </div>
@@ -286,9 +286,9 @@ select
     and i.finalia <= 16
   ) then 'average' when (i.finalia < 12) then 'weak' else 'un_known' end cat
 from
-  student3 s,
-  iamarks3 i,
-  semsec3 sec
+  student s,
+  iamarks i,
+  semsec sec
 where
   s.usn = i.usn
   and i.ssid = sec.ssid
