@@ -32,14 +32,12 @@ create table student(
 
         <div class='code'>
             <pre class='pro1'>
-INSERT INTO student (USN, SNAME, ADDRESS, PHONE, GENDER)
-VALUES 
-('1va12cs001', 'anwar', 'blore', '9845611111', 'male'),
-('1va12cs002', 'bharath', 'mysore', '9845611112', 'male'),
-('1va12cs003', 'chaithra', 'hubli', '9845611113', 'female'),
-('1va13cs004', 'daniel', 'blore', '9845611114', 'male'),
-('1bi15cs101', 'rajesh', 'pune', '9845611115', 'male'),
-('1bi15cs102', 'gayathri', 'blore', '9845611116', 'female');
+INSERT INTO student values  ('1va12cs001', 'anwar', 'blore', '9845611111', 'male');
+INSERT INTO student values ('1va12cs002', 'bharath', 'mysore', '9845611112', 'male');
+INSERT INTO student values ('1va12cs003', 'chaithra', 'hubli', '9845611113', 'female');
+INSERT INTO student values ('1va13cs004', 'daniel', 'blore', '9845611114', 'male');
+INSERT INTO student values ('1bi15cs101', 'rajesh', 'pune', '9845611115', 'male');
+INSERT INTO student values ('1bi15cs102', 'gayathri', 'blore', '9845611116', 'female');
                 </pre>
             <div class='copy-code-btn btn1'></div>
         </div>
@@ -58,16 +56,14 @@ create table semsec(
         </div>
         <div class='code'>
             <pre class='pro1'>
-INSERT INTO semsec (SSID, SEM, SEC)
-VALUES 
-('s1', 4, 'c'),
-('s2', 8, 'a'),
-('s3', 8, 'b'),
-('s4', 8, 'c'),
-('s5', 5, 'a'),
-('s6', 5, 'b'),
-('s7', 4, 'b'),
-('s8', 4, 'a');
+INSERT INTO semsec values ('s1', 4, 'c');
+INSERT INTO semsec values ('s2', 8, 'a');
+INSERT INTO semsec values ('s3', 8, 'b');
+INSERT INTO semsec values ('s4', 8, 'c');
+INSERT INTO semsec values ('s5', 5, 'a');
+INSERT INTO semsec values ('s6', 5, 'b');
+INSERT INTO semsec values ('s7', 4, 'b');
+INSERT INTO semsec values ('s8', 4, 'a');
              </pre>
             <div class='copy-code-btn btn1'></div>
         </div>
@@ -86,14 +82,12 @@ create table clas(
         </div>
         <div class='code'>
             <pre class='pro1'>
-INSERT INTO clas (USN, SSID)
-VALUES 
-('1bi15cs101', 's5'),
-('1bi15cs102', 's3'),
-('1va12cs001', 's1'),
-('1va12cs002', 's2'),
-('1va12cs003', 's3'),
-('1va13cs004', 's4');
+INSERT INTO clas values ('1bi15cs101', 's5');
+INSERT INTO clas values ('1bi15cs102', 's3');
+INSERT INTO clas values ('1va12cs001', 's1');
+INSERT INTO clas values ('1va12cs002', 's2');
+INSERT INTO clas values ('1va12cs003', 's3');
+INSERT INTO clas values ('1va13cs004', 's4');
              </pre>
             <div class='copy-code-btn btn1'></div>
         </div>
@@ -113,15 +107,13 @@ create table subject(
         </div>
         <div class='code'>
             <pre class='pro1'>
-INSERT INTO subject (SUBCODE, TITLE, SEM, CREDITS)
-VALUES 
-('10cs51', 'me', 5, 4),
-('10cs52', 'dbms', 5, 4),
-('10cs81', 'aca', 8, 3),
-('10cs82', 'nm', 8, 3),
-('10cs83', 'dos', 8, 3),
-('10cs41', 'ada', 4, 4),
-('10cs42', 'c++', 4, 4);
+INSERT INTO subject values ('10cs51', 'me', 5, 4);
+INSERT INTO subject values ('10cs52', 'dbms', 5, 4);
+INSERT INTO subject values ('10cs81', 'aca', 8, 3);
+INSERT INTO subject values ('10cs82', 'nm', 8, 3);
+INSERT INTO subject values ('10cs83', 'dos', 8, 3);
+INSERT INTO subject values ('10cs41', 'ada', 4, 4);
+INSERT INTO subject values ('10cs42', 'c++', 4, 4);
          </pre>
             <div class='copy-code-btn btn1'></div>
         </div>
@@ -137,28 +129,33 @@ create table iamarks(
   test1 number(6, 3),
   test2 number(6, 3),
   test3 number(6, 3),
-  finalIA number(6, 3)
 );             </pre>
             <div class='copy-code-btn btn1'></div>
         </div>
         <div class='code'>
             <pre class='pro1'>
-INSERT INTO iamarks (USN, SUBCODE, SSID, TEST1, TEST2, TEST3)
-VALUES 
-('1va12cs001', '10cs41', 's7', 11, 15, 18),
-('1va12cs001', '10cs42', 's6', 13, 19, 12),
-('1bi15cs101', '10cs51', 's5', 19, 20, 12),
-('1bi15cs101', '10cs52', 's5', 12, 14, 16),
-('1va12cs002', '10cs81', 's2', 16, 17, 18),
-('1va12cs002', '10cs82', 's2', 12, 16, 15),
-('1va12cs002', '10cs83', 's2', 16, 18, 20),
-('1va12cs003', '10cs81', 's3', 14, 12, 11),
-('1va12cs003', '10cs82', 's3', 12, 11, 16),
-('1va12cs003', '10cs83', 's3', 18, 12, 10),
-('1va13cs004', '10cs81', 's4', 16, 12, 11);
+INSERT INTO iamarks values ('1va12cs001', '10cs41', 's7', 11, 15, 18);
+INSERT INTO iamarks values ('1va12cs001', '10cs42', 's6', 13, 19, 12);
+INSERT INTO iamarks values ('1bi15cs101', '10cs51', 's5', 19, 20, 12);
+INSERT INTO iamarks values ('1bi15cs101', '10cs52', 's5', 12, 14, 16);
+INSERT INTO iamarks values ('1va12cs002', '10cs81', 's2', 16, 17, 18);
+INSERT INTO iamarks values ('1va12cs002', '10cs82', 's2', 12, 16, 15);
+INSERT INTO iamarks values ('1va12cs002', '10cs83', 's2', 16, 18, 20);
+INSERT INTO iamarks values ('1va12cs003', '10cs81', 's3', 14, 12, 11);
+INSERT INTO iamarks values ('1va12cs003', '10cs82', 's3', 12, 11, 16);
+INSERT INTO iamarks values ('1va12cs003', '10cs83', 's3', 18, 12, 10);
+INSERT INTO iamarks values ('1va13cs004', '10cs81', 's4', 16, 12, 11);
               </pre>
             <div class='copy-code-btn btn1'></div>
         </div>
+
+        <div class='code'>
+          <pre class='pro1'>
+alter table iamarks
+add finalIA number(6,3);
+            </pre>
+          <div class='copy-code-btn btn1'></div>
+      </div>
 
 <!-- Q1 -->
         <div class='code'>
