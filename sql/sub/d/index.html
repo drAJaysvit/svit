@@ -268,13 +268,14 @@ select
   sec.sec,
   i.subcode,
   i.finalia,
-  case when (
-    I.finalia >= 17
-    and i.finalia <= 20
-  ) then 'outstanding' when (
-    i.finalia >= 12
-    and i.finalia <= 16
-  ) then 'average' when (i.finalia < 12) then 'weak' else 'un_known' end cat
+  case when (I.finalia >= 17 and i.finalia <= 20) 
+        then 'outstanding' 
+      when ( i.finalia >= 12and i.finalia <= 16) 
+        then 'average' 
+      when (i.finalia < 12) 
+        then 'weak' 
+      else 'un_known'
+  end cat
 from
   student s,
   iamarks i,
