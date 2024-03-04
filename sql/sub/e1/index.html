@@ -261,7 +261,7 @@ and bc.branch_id = l.branch_id;
 select 
   * 
 from 
-  book1 partition (p4);
+  book partition (p4);
 
                 </pre>
             <div class='copy-code-btn btn1'></div>
@@ -271,7 +271,7 @@ from
 select 
   * 
 from 
-  book1 partition (p5);
+  book partition (p5);
 
                 </pre>
             <div class='copy-code-btn btn1'></div>
@@ -281,7 +281,7 @@ from
 select 
   * 
 from 
-  book1 partition (p5) 
+  book partition (p5) 
 where 
   title = 'c';
 
