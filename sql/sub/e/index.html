@@ -65,7 +65,7 @@ CREATE TABLE DEPARTMENT(
             <pre class='pro1'>
 insert into DEPARTMENT values (1,'accounts',1000,'10-mar-00');
 insert into DEPARTMENT values (2,'research',1001,'20-jan-01');
-insert into DEPARTMENT values (3,'sales',1002,'15-feb-00');
+insert into DEPARTMENT values (3,'sales',1002,'15-mar-00');
 insert into DEPARTMENT values (4,'operations',1003,'16-jul-03');
 insert into DEPARTMENT values (5,'finance',1004,'19-jul-10');
             </pre>
@@ -201,16 +201,17 @@ INSERT INTO works_on VALUES (1006, 11, 3);
 
             </p>
             <pre class='pro1'>
-    SELECT DISTINCT p.pno 
-    FROM project p, department d, employee e 
-    WHERE d.dno = p.dno AND mgrssn = ssn AND name LIKE '%RAMYA'
-
+SELECT DISTINCT p.pno 
+FROM project p
+JOIN department d ON d.dno = p.dno
+JOIN employee e ON d.mgrssn = e.ssn
+WHERE e.name LIKE '%ramya'
 UNION 
-
-    SELECT DISTINCT p.pno 
-    FROM project p, works_on w, employee e 
-    WHERE p.pno = w.pno AND w.ssn = e.ssn AND name LIKE '%RAMYA'
-;              </pre>
+SELECT DISTINCT p.pno 
+FROM project p
+JOIN works_on w ON p.pno = w.pno
+JOIN employee e ON w.ssn = e.ssn
+WHERE e.name LIKE '%ramya';              </pre>
             <div class='copy-code-btn btn1'></div>
         </div>
 <!-- Q2 -->
