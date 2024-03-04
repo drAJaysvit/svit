@@ -258,32 +258,23 @@ and bc.branch_id = l.branch_id;
 <div class='code'>
             <p class='text-size'>4.Partition the BOOK table based on year of publication. Demonstrate its working with a simple query. Book table partioned into 5 partions as p1,p2,p3,p4,p5 while creating the table.</p>
             <pre class='pro1'>
-select 
-  * 
-from 
-  book partition (p4);
+select * from book partition (p4);
 
                 </pre>
             <div class='copy-code-btn btn1'></div>
         </div>
         <div class='code'>
             <pre class='pro1'>
-select 
-  * 
-from 
-  book partition (p5);
+select * from book partition (p5);
 
                 </pre>
             <div class='copy-code-btn btn1'></div>
         </div>
         <div class='code'>
             <pre class='pro1'>
-select 
-  * 
-from 
-  book partition (p5) 
-where 
-  title = 'c';
+select * 
+from book partition (p5) 
+where title = 'c';
 
                 </pre>
             <div class='copy-code-btn btn1'></div>
