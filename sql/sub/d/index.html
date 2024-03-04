@@ -242,19 +242,12 @@ select *from TEST1_MARKS_OF_1bi15cs101;
 update
   iamarks
 set
-  finalia = case when (
-    test1 < test2
-    and test1 < test3
-  ) then ceil(
-    (test2 + test3)/ 2
-  ) when (
-    test2 < test1
-    and test2 < test3
-  ) then ceil(
-    (test1 + test3)/ 2
-  ) else ceil(
-    (test1 + test2)/ 2
-  ) end;
+  finalia = case when (test1 < test2 and test1 < test3) 
+                 then ceil((test2 + test3)/ 2) 
+            when (test2 < test1 and test2 < test3) 
+                  then ceil((test1 + test3)/ 2) 
+            else ceil((test1 + test2)/ 2) 
+            end;
 
 select *from iamarks;
                 </pre>
