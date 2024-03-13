@@ -419,6 +419,69 @@ class StackImplementation
             <div class="copy-code-btn btn1"></div>
         </div>
 
+        <!-- 9 -->
+        <div class="code">
+            <p class="text-size">9.Complex number  </p>
+            <pre class="pro1">
+ using System;
+class Complex
+{
+    private double real;
+    private double imaginary;
+
+    public Complex(double real, double imaginary)
+    {
+        this.real = real;
+        this.imaginary = imaginary;
+    }
+
+    public static Complex operator + (Complex c1, Complex c2)
+    {
+        return new Complex(c1.real + c2.real, c1.imaginary + c2.imaginary);
+    }
+
+    public void Display()
+    {
+        Console.WriteLine($"Result: {real} + {imaginary}i");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter the first complex number: ");
+
+        Console.Write("Real Part: ");
+        double real1 = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Imaginary Part: ");
+        double imaginary1 = Convert.ToDouble(Console.ReadLine());
+
+
+        Console.WriteLine("Enter the second complex number: ");
+
+        Console.Write("Real Part: ");
+        double real2 = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Imaginary Part: ");
+        double imaginary2 = Convert.ToDouble(Console.ReadLine());
+
+        Complex complex1 = new Complex(real1, imaginary1);
+        Complex complex2 = new Complex(real2, imaginary2);
+
+        Complex result = complex1 + complex2;
+
+        Console.WriteLine("\nSum of the complex number:");
+        result.Display();
+    }
+}
+                
+                </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div>
+
+
         <!-- 10 -->
         <div class="code">
             <p class="text-size"> 10. C# program to create a class named shape.  </p>
@@ -498,6 +561,93 @@ class StackImplementation
             <div class="copy-code-btn btn1"></div>
         </div>
 
+        <!-- 11 -->
+        <div class="code">
+            <p class="text-size"> 11. C# program to   </p>
+            <pre class="pro1">
+ using System;
+
+
+abstract class Shape
+{
+    public abstract double CalulateArea();
+
+    public abstract double CalulatePerimeter();
+}
+
+class Circle : Shape
+{
+    private double radius;
+
+    public Circle(double radius)
+    {
+        this.radius = radius;
+    }
+
+    public override double CalulateArea()
+    {
+        return Math.PI * Math.Pow(radius, 2);
+    }
+    
+    public override double CalulatePerimeter()
+    {
+    return 2 * Math.PI * radius;
+    }
+}
+
+class Triangle : Shape
+{
+    private double side1, side2, side3;
+
+    public Triangle(double side1, double side2, double side3)
+    {
+        this.side1 = side1;
+        this.side2 = side2;
+        this.side3 = side3;
+    }
+
+    public override double CalulateArea()
+    {
+        double s = (side1 + side2 + side3) / 2;
+        return Math.Sqrt(s*(s-side1)*(s-side2)*(s-side3));
+    }
+
+    public override double CalulatePerimeter()
+    {
+        return side1 + side2 + side3;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Circle circle = new Circle(5);
+        Console.WriteLine($"Circle Area:{circle.CalulateArea()}");
+        Console.WriteLine($"Circle Perimeter:{circle.CalulatePerimeter()}");
+        Console.WriteLine();
+
+        Triangle triangle = new Triangle(3,4,5);
+        Console.WriteLine($"Triangle Area:{triangle.CalulateArea()}");
+        Console.WriteLine($"Triangle Perimeter:{triangle.CalulatePerimeter()}");
+
+    }
+}
+
+
+                
+                </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div>
+        <!-- 12 -->
+        <div class="code">
+            <p class="text-size"> 12 C# program to  </p>
+            <pre class="pro1">
+ 
+                
+                </pre>
+            <div class="copy-code-btn btn1"></div>
+        </div>
 
 <!-- 
         <div class="code">
