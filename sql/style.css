@@ -7,12 +7,16 @@
     font-family: 'Poppins', 'sans-serif';
 
 }
+body {
+    background-color: #1c1b1b;
+    color: #a7a3a3;
+}
 
 .wrapper{
     width: 100vw;
     min-height: 100vh;
-    color: var(--white);
-    background:linear-gradient(90deg, rgba(0, 255, 235, 1) 0%, rgba(7, 58, 187, 1) 100%);
+    /* color: var(--white);
+    background:linear-gradient(90deg, rgba(0, 255, 235, 1) 0%, rgba(7, 58, 187, 1) 100%); */
     display: grid;
     place-items: center;
     align-items: start;
