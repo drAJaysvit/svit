@@ -1,4 +1,4 @@
-const cpyall = document.getElementsByClassName('cpy-all')
+const cpyall = document.querySelector('.cpy-all')
 
 
 
