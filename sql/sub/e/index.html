@@ -253,13 +253,16 @@ WHERE NOT EXISTS ( SELECT PNO FROM PROJECT WHERE DNO=5
 <div class='code'>
   <p class='text-size'>or if MINUS not supported</p>
   <pre class='pro1'>
+------------------if MINUS not supported-----------------------------------------    
 SELECT E.NAME 
 FROM EMPLOYEE E 
 WHERE NOT EXISTS (
     SELECT PNO FROM PROJECT 
     WHERE DNO=5 
     AND PNO NOT IN (SELECT PNO FROM WORKS_ON W WHERE W.SSN=E.SSN)
-);      </pre>
+);  
+----------------------------------------------------------------------------------
+</pre>
   <div class='copy-code-btn btn1'></div>
 </div>
 
