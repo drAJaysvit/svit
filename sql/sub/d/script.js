@@ -11,7 +11,7 @@ for (const ele in pros) {
 })
 }
 
-const cpyall = document.querySelector('.cpy-all');
+const cpyall = document.getElementsByClassName('cpy-all')
 
 cpyall.addEventListener('click',()=>{
     let content = "";
