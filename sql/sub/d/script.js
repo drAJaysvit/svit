@@ -11,23 +11,13 @@ for (const ele in pros) {
 })
 }
 
-// btn1.addEventListener('click',()=>{
-//     navigator.clipboard.writeText(pro1.textContent);
-//     alert("Copied")
-// })
+const cpyall = document.querySelector('.cpy-all');
 
-// const pro2 = document.querySelector('.pro2');
-// const btn2 = document.querySelector('.btn2')
-
-// btn2.addEventListener('click',()=>{
-//     navigator.clipboard.writeText(pro2.textContent);
-//     alert("Copied")
-// })
-
-// const pro3 = document.querySelector('.pro3');
-// const btn3 = document.querySelector('.btn3')
-
-// btn3.addEventListener('click',()=>{
-//     navigator.clipboard.writeText(pro3.textContent);
-//     alert("Copied")
-// })
+cpyall.addEventListener('click',()=>{
+    let content = "";
+    for(let ele in pros){
+        content = content + pros[ele].textContent + "\n\n";
+    }
+    navigator.clipboard.writeText(content);
+    alert("Copied all");
+})
