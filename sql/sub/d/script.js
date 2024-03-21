@@ -1,4 +1,12 @@
 const cpyall = document.querySelector('.cpy-all')
+cpyall.addEventListener('click',()=>{
+    let content = "";
+    for(let ele in pros){
+        content = content + pros[ele].textContent + "\n\n";
+    }
+    navigator.clipboard.writeText(content);
+    alert("Copied all");
+})
 
 
 
@@ -13,11 +21,3 @@ for (const ele in pros) {
 })
 }
 
-cpyall.addEventListener('click',()=>{
-    let content = "";
-    for(let ele in pros){
-        content = content + pros[ele].textContent + "\n\n";
-    }
-    navigator.clipboard.writeText(content);
-    alert("Copied all");
-})
