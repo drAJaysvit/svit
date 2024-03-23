@@ -27,7 +27,7 @@ body {
 }
 .head{
     color: white;
-    background-color: rgba(255, 255,255, 0.15);
+    background-color: rgba(255, 255, 255, 0.464);
     border-radius: 1rem;
     border: 1px solid rgba(255, 255, 255, 0.25);
     padding: 0.5rem 3rem;
@@ -35,6 +35,7 @@ body {
     text-decoration: underline;
     font-size: 2rem;
     margin-top: 2rem;
+    display: flex;
  
 }
 
