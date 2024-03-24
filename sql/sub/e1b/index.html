@@ -147,27 +147,6 @@ WHERE
                 </pre>
             <div class='copy-code-btn btn1'></div>
         </div>
-        <div class='code'>
-          <pre class='pro1'>
-SELECT 
-  salesman_id, 
-  name 
-FROM 
-  salesman 
-where 
-  salesman_id in (
-    SELECT 
-      salesman_id 
-    FROM 
-      customer 
-    group by 
-      salesman_id 
-    having 
-      count(customer_id)> 1
-  );
-              </pre>
-          <div class='copy-code-btn btn1'></div>
-      </div>
 
 <!-- Q3 -->
 <div class='code'>
