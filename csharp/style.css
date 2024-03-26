@@ -11,7 +11,8 @@
 
 body {
     background-color: #1c1b1b;
-    color: #a7a3a3;
+    /* color: #a7a3a3; */
+    color: white;
 }
 
 .wrapper{
