@@ -180,18 +180,26 @@ class Program
     try {
       int numerator = 10;
       int denominator = 0;
-      int result = numerator / denominator; // This line will throw an exception
+
+      int result = numerator / denominator; 
+
       Console.WriteLine($"Result of division: {result}");
-    } catch (DivideByZeroException ex) {
+    } 
+    catch (DivideByZeroException ex) 
+    {
       Console.WriteLine($"Division by zero exception: {ex.Message}");
     }
-    
+
     try {
       int[] numbers = { 1, 2, 3, 4, 5 };
-      int index = 10;             // Accessing an index that is out of range
-      int value = numbers[index]; // This line will throw an exception
+      int index = 10;            
+
+      int value = numbers[index]; 
+
       Console.WriteLine($"Value at index {index}: {value}");
-    } catch (IndexOutOfRangeException ex) {
+    } 
+    catch (IndexOutOfRangeException ex) 
+    {
       Console.WriteLine($"Index out of range exception: {ex.Message}");
     }
     Console.ReadLine();
