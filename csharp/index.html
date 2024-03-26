@@ -44,14 +44,16 @@ namespace CalculatorProgram
         {
             Console.WriteLine("Simple Arithmetic Calculator");
             Console.WriteLine("Supported Operations: +, -, *, /, %");
-            // Read operator and operands from the console
+            
             Console.Write("Enter operator: ");
             char operatorSymbol = Convert.ToChar(Console.ReadLine());
+
             Console.Write("Enter operand 1: ");
             double operand1 = Convert.ToDouble(Console.ReadLine());
+
             Console.Write("Enter operand 2: ");
             double operand2 = Convert.ToDouble(Console.ReadLine());
-            // Perform the requested operation
+
             double result = 0;
             switch (operatorSymbol)
             {
@@ -65,7 +67,6 @@ namespace CalculatorProgram
                     result = operand1 * operand2;
                     break;
                 case '/':
-                    // Check for division by zero
                     if (operand2 != 0)
                     {
                         result = operand1 / operand2;
@@ -76,8 +77,8 @@ namespace CalculatorProgram
                         return;
                     }
                     break;
+
                 case '%':
-                    // Check for modulus by zero
                     if (operand2 != 0)
                     {
                         result = operand1 % operand2;
@@ -88,11 +89,12 @@ namespace CalculatorProgram
                         return;
                     }
                     break;
+
                 default:
                     Console.WriteLine("Error: Invalid operator.");
                     return;
+
             }
-            // Display the result
             Console.WriteLine($"Result: {operand1} {operatorSymbol} {operand2} = {result}");
         }
     }
@@ -147,12 +149,12 @@ namespace LogicalPrograms {
     {
       Console.Write("Enter a String : ");
       string inputString = Console.ReadLine();
+
       int len = inputString.Length;
+
       Console.WriteLine("All substrings for given string are : ");
-      // This loop maintains the starting character
+
       for (int i = 0; i < len; i++) {
-        // This loop adds the next character every iteration for the substring
-        // and then print
         for (int j = 0; j < len - i; j++) {
           Console.WriteLine(inputString.Substring(i, j + 1) + " ");
         }
@@ -175,7 +177,6 @@ class Program
 {
   static void Main()
   {
-    // Division by Zero Exception
     try {
       int numerator = 10;
       int denominator = 0;
@@ -184,7 +185,7 @@ class Program
     } catch (DivideByZeroException ex) {
       Console.WriteLine($"Division by zero exception: {ex.Message}");
     }
-    // Index Out of Range Exception
+    
     try {
       int[] numbers = { 1, 2, 3, 4, 5 };
       int index = 10;             // Accessing an index that is out of range
