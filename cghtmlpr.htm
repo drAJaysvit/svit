@@ -1,0 +1,185 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Microsoft Word - CG_Sample_programs[1].docx</title>
+    <meta name="author" content="Ajay Chavan" />
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            text-indent: 0;
+        }
+
+        h1 {
+            color: black;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 18pt;
+        }
+
+        h2 {
+            color: black;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 12pt;
+        }
+
+        .s1 {
+            color: #00F;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 12pt;
+        }
+
+        p {
+            color: black;
+            font-family: "Times New Roman", serif;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+            font-size: 12pt;
+            margin: 0pt;
+        }
+
+        li {
+            display: block;
+        }
+
+        #l1 {
+            padding-left: 0pt;
+            counter-reset: c1 1;
+        }
+
+        #l1>li>*:first-child:before {
+            counter-increment: c1;
+            content: counter(c1, decimal)". ";
+            color: black;
+            font-style: normal;
+            font-weight: normal;
+            text-decoration: none;
+        }
+
+        #l1>li:first-child>*:first-child:before {
+            counter-increment: c1 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="padding-top: 3pt;padding-left: 158pt;text-indent: 0pt;text-align: center;">Sample programs</h1>
+    <ol id="l1">
+        <li data-list-text="1.">
+            <h2 style="padding-top: 11pt;padding-left: 34pt;text-indent: -12pt;text-align: left;">Program to create a
+                basic Open GL window</h2>
+            <p style="text-indent: 0pt;text-align: left;"><br /></p>
+            <p class="s1" style="padding-left: 21pt;text-indent: 0pt;text-align: left;">#include<span
+                    style=" color: #A31515;">&lt;GL/glut.h&gt; </span>void <span style=" color: #000;">display
+                    (</span>void<span style=" color: #000;">)</span></p>
+            <p style="padding-left: 21pt;text-indent: 0pt;line-height: 14pt;text-align: left;">{</p>
+            <p style="padding-top: 6pt;padding-left: 60pt;text-indent: 0pt;text-align: left;">glClearColor
+                (1.0,1.0,1.0,1.0);</p>
+            <p style="padding-top: 7pt;padding-left: 60pt;text-indent: 0pt;line-height: 150%;text-align: left;">glClear
+                (GL_COLOR_BUFFER_BIT); glLoadIdentity(); gluOrtho2D(0.0,499.0,0.0,499.0);</p>
+            <p style="padding-left: 60pt;text-indent: 0pt;text-align: left;">glFlush ( );</p>
+            <p style="padding-top: 7pt;padding-left: 21pt;text-indent: 0pt;text-align: left;">}</p>
+            <p class="s1" style="padding-top: 6pt;padding-left: 21pt;text-indent: 0pt;text-align: left;">int <span
+                    style=" color: #000;">main (</span>int <span style=" color: #000;">argc, </span>char <span
+                    style=" color: #000;">**argv)</span></p>
+            <p style="padding-top: 7pt;padding-left: 21pt;text-indent: 0pt;text-align: left;">{</p>
+            <p style="padding-top: 6pt;padding-left: 60pt;text-indent: 0pt;line-height: 151%;text-align: left;">glutInit
+                (&amp;argc, argv); glutInitDisplayMode (GLUT_SINGLE); glutInitWindowSize (500, 500);</p>
+            <p style="padding-left: 60pt;text-indent: 0pt;line-height: 150%;text-align: left;">glutInitWindowPosition
+                (100,100); glutCreateWindow (<span style=" color: #A31515;">&quot;A basic open GL window&quot;</span>);
+                glutDisplayFunc (display);</p>
+            <p style="padding-left: 60pt;text-indent: 0pt;line-height: 150%;text-align: left;">glutMainLoop( ); <span
+                    style=" color: #00F;">return </span>0;</p>
+            <p style="padding-left: 21pt;text-indent: 0pt;text-align: left;">}</p>
+        </li>
+        <li data-list-text="2.">
+            <h2 style="padding-top: 6pt;padding-left: 33pt;text-indent: -11pt;text-align: left;">Program to draw/display
+                point in OpenGL</h2>
+            <p style="text-indent: 0pt;text-align: left;"><br /></p>
+            <p class="s1" style="padding-left: 21pt;text-indent: 0pt;line-height: 150%;text-align: left;">#include<span
+                    style=" color: #A31515;">&lt;GL/glut.h&gt; </span>#include<span
+                    style=" color: #A31515;">&lt;stdlib.h&gt;</span></p>
+            <p style="text-indent: 0pt;text-align: left;"><br /></p>
+            <p class="s1" style="padding-left: 21pt;text-indent: 0pt;text-align: left;">void <span
+                    style=" color: #000;">myInit(</span>void<span style=" color: #000;">)</span></p>
+            <p style="padding-top: 7pt;padding-left: 21pt;text-indent: 0pt;text-align: left;">{</p>
+            <p style="padding-top: 6pt;padding-left: 60pt;text-indent: 0pt;text-align: left;">
+                glClearColor(2.0,2.0,2.0,4.0);</p>
+            <p style="padding-top: 6pt;padding-left: 60pt;text-indent: 0pt;line-height: 150%;text-align: left;">
+                glColor3f(0.0f,0.0f,0.0f); glPointSize(4.0); glMatrixMode(GL_PROJECTION); glLoadIdentity();</p>
+            <p style="padding-left: 60pt;text-indent: 0pt;text-align: left;">gluOrtho2D(0.0, 499.0, 0.0, 499.0);</p>
+            <p style="padding-top: 6pt;padding-left: 21pt;text-indent: 0pt;text-align: left;">}</p>
+            <p style="text-indent: 0pt;text-align: left;"><br /></p>
+            <p class="s1" style="padding-top: 4pt;padding-left: 21pt;text-indent: 0pt;text-align: left;">void <span
+                    style=" color: #000;">display(</span>void<span style=" color: #000;">)</span></p>
+            <p style="padding-top: 6pt;padding-left: 21pt;text-indent: 0pt;text-align: left;">{</p>
+            <p style="padding-top: 6pt;padding-left: 60pt;text-indent: 0pt;line-height: 150%;text-align: left;">
+                glClear(GL_COLOR_BUFFER_BIT); glBegin(GL_POINTS); glVertex2i(100,200); glVertex2i(400,200);</p>
+            <p style="padding-top: 5pt;padding-left: 60pt;text-indent: 0pt;line-height: 186%;text-align: left;">
+                glVertex2i(200,100); glVertex2i(200,400);</p>
+            <p style="padding-left: 60pt;text-indent: 0pt;line-height: 150%;text-align: left;">glEnd(); glFlush();</p>
+            <p style="padding-left: 21pt;text-indent: 0pt;text-align: left;">}</p>
+            <p style="text-indent: 0pt;text-align: left;"><br /></p>
+            <p class="s1" style="padding-top: 4pt;padding-left: 21pt;text-indent: 0pt;text-align: left;">void <span
+                    style=" color: #000;">main(</span>int <span style=" color: #000;">argc, </span>char<span
+                    style=" color: #000;">** argv)</span></p>
+            <p style="padding-top: 6pt;padding-left: 21pt;text-indent: 0pt;text-align: left;">{</p>
+            <p style="padding-top: 6pt;padding-left: 60pt;text-indent: 0pt;line-height: 150%;text-align: left;">
+                glutInit(&amp;argc, argv); glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);</p>
+            <p style="padding-top: 3pt;padding-left: 60pt;text-indent: 0pt;line-height: 151%;text-align: left;">
+                glutInitWindowSize(500,500); glutInitWindowPosition(100,100); glutCreateWindow(<span
+                    style=" color: #A31515;">&quot;My First Graphics Program&quot;</span>); glutDisplayFunc (display);
+            </p>
+            <p style="padding-left: 60pt;text-indent: 0pt;line-height: 150%;text-align: left;">myInit(); glutMainLoop (
+                );</p>
+            <p style="padding-left: 21pt;text-indent: 0pt;text-align: left;">}</p>
+            <p style="text-indent: 0pt;text-align: left;"><br /></p>
+        </li>
+        <li data-list-text="3.">
+            <h2 style="padding-top: 10pt;padding-left: 32pt;text-indent: -10pt;text-align: left;">Program to implement
+                horizontal and vertical lines</h2>
+        </li>
+    </ol>
+    <p style="text-indent: 0pt;text-align: left;"><br /></p>
+    <p class="s1" style="padding-left: 21pt;text-indent: 0pt;line-height: 150%;text-align: left;">#include<span
+            style=" color: #A31515;">&lt;GL/glut.h&gt; </span>#include<span style=" color: #A31515;">&lt;stdlib.h&gt;
+        </span>void <span style=" color: #000;">myInit(</span>void<span style=" color: #000;">)</span></p>
+    <p style="padding-left: 21pt;text-indent: 0pt;text-align: left;">{</p>
+    <p style="padding-top: 6pt;padding-left: 60pt;text-indent: 0pt;text-align: left;">glClearColor(2.0,2.0,2.0,4.0);</p>
+    <p style="padding-top: 7pt;padding-left: 60pt;text-indent: 0pt;line-height: 150%;text-align: left;">
+        glColor3f(0.0f,0.0f,0.0f); glLineWidth(4.0); glMatrixMode(GL_PROJECTION); glLoadIdentity();
+        gluOrtho2D(0.0,499.0,0.0,499.0);</p>
+    <p style="padding-left: 21pt;text-indent: 0pt;line-height: 14pt;text-align: left;">}</p>
+    <p class="s1" style="padding-top: 6pt;padding-left: 21pt;text-indent: 0pt;text-align: left;">void <span
+            style=" color: #000;">display(</span>void<span style=" color: #000;">)</span></p>
+    <p style="padding-top: 6pt;padding-left: 21pt;text-indent: 0pt;text-align: left;">{</p>
+    <p style="padding-top: 7pt;padding-left: 60pt;text-indent: 0pt;line-height: 150%;text-align: left;">
+        glClear(GL_COLOR_BUFFER_BIT); glBegin(GL_LINES); glVertex2i(100,200); glVertex2i(400,200); glVertex2i(200,100);
+        glVertex2i(200,400);</p>
+    <p style="padding-left: 60pt;text-indent: 0pt;line-height: 187%;text-align: left;">glEnd(); glFlush();</p>
+    <p style="padding-left: 60pt;text-indent: 0pt;line-height: 14pt;text-align: left;">}</p>
+    <p class="s1" style="padding-top: 3pt;padding-left: 21pt;text-indent: 0pt;text-align: left;">void <span
+            style=" color: #000;">main(</span>int <span style=" color: #000;">argc, </span>char<span
+            style=" color: #000;">** argv)</span></p>
+    <p style="padding-top: 7pt;padding-left: 21pt;text-indent: 0pt;text-align: left;">{</p>
+    <p style="padding-top: 7pt;padding-left: 60pt;text-indent: 0pt;line-height: 150%;text-align: left;">
+        glutInit(&amp;argc,argv); glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); glutInitWindowSize(500,500);
+        glutInitWindowPosition(100,100); glutCreateWindow(<span style=" color: #A31515;">&quot;My First
+            Attempt&quot;</span>); glutDisplayFunc(display);</p>
+    <p style="padding-left: 60pt;text-indent: 0pt;line-height: 150%;text-align: left;">myInit(); glutMainLoop();</p>
+    <p style="padding-left: 21pt;text-indent: 0pt;text-align: left;">}</p>
+</body>
+
+</html>
