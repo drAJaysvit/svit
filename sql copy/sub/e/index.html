@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>E Company Database</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+
+<body>
+    <div class='wrapper'>
+        <div class='head'>Exercise-E. Company Database</div>
+        <button class='head cpy-all'>👉click here to Copy full program👈</button>
+
+
+
+        <img src='./Image_021.jpg' alt=''>
+
+        <div class='code'>
+            <p class='text-size'>EMPLOYEE</p>
+
+            <pre class='pro1'>
+CREATE TABLE EMPLOYEE(
+  SSN INT PRIMARY KEY, 
+  NAME VARCHAR(30), 
+  ADDRESS VARCHAR(30), 
+  SEX CHAR(1), 
+  SALARY Number(8), 
+  SUPERSSN INT REFERENCES EMPLOYEE(SSN)
+);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <div class='code'>
+            <pre class='pro1'>
+insert into EMPLOYEE(SSN,NAME,ADDRESS,SEX,SALARY) values ('1000','kishore','Bangalore','m',50000);
+insert into EMPLOYEE(SSN,NAME,ADDRESS,SEX,SALARY) values ('1001','ram','mysore','m',650000);
+insert into EMPLOYEE(SSN,NAME,ADDRESS,SEX,SALARY) values ('1002','lakshmi','pune','f',750000);
+insert into EMPLOYEE(SSN,NAME,ADDRESS,SEX,SALARY) values ('1003','raj','hyderabad','m',10000);
+insert into EMPLOYEE(SSN,NAME,ADDRESS,SEX,SALARY) values ('1004','ramya','hubli','f',15000);
+insert into EMPLOYEE(SSN,NAME,ADDRESS,SEX,SALARY) values ('1005','harsha','chennai','m',16000);
+insert into EMPLOYEE(SSN,NAME,ADDRESS,SEX,SALARY) values ('1006','kalyan','Bangalore','m',670000);
+insert into EMPLOYEE(SSN,NAME,ADDRESS,SEX,SALARY) values ('1007','abhijith','Bangalore','m',8500);
+insert into EMPLOYEE(SSN,NAME,ADDRESS,SEX,SALARY) values ('1008','mahi','pune','m',25000);
+insert into EMPLOYEE(SSN,NAME,ADDRESS,SEX,SALARY) values ('1009','rahul','pune','m',75000);
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- book -->
+        <div class='code'>
+            <p class='text-size'>DEPARTMENT</p>
+            <pre class='pro1'>
+CREATE TABLE DEPARTMENT(
+  DNO INT PRIMARY KEY, 
+  DNAME VARCHAR(12) UNIQUE, 
+  MGRSSN INT REFERENCES EMPLOYEE(SSN), 
+  MGRSTDATE DATE
+);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+insert into DEPARTMENT values (1,'accounts',1000,'10-mar-00');
+insert into DEPARTMENT values (2,'research',1001,'20-jan-01');
+insert into DEPARTMENT values (3,'sales',1002,'15-mar-00');
+insert into DEPARTMENT values (4,'operations',1003,'16-jul-03');
+insert into DEPARTMENT values (5,'finance',1004,'19-jul-10');
+            </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- book_authors -->
+        <div class='code'>
+            <p class='text-size'>Add DNO</p>
+            <pre class='pro1'>
+ALTER TABLE 
+  EMPLOYEE 
+ADD 
+  DNO INT REFERENCES DEPARTMENT(DNO);
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+UPDATE employee 
+SET SUPERSSN = 1001, DNO = 1
+WHERE ssn = 1000;
+
+UPDATE employee 
+SET SUPERSSN = 1002, DNO = 2
+WHERE ssn = 1001;
+
+UPDATE employee 
+SET SUPERSSN = 1002, DNO = 2
+WHERE ssn = 1002;
+
+UPDATE employee 
+SET SUPERSSN = 1003, DNO = 4
+WHERE ssn = 1003;
+
+UPDATE employee 
+SET SUPERSSN = 1002, DNO = 5
+WHERE ssn = 1004;
+
+UPDATE employee 
+SET SUPERSSN = 1002, DNO = 2
+WHERE ssn = 1005;
+
+UPDATE employee 
+SET SUPERSSN = 1002, DNO = 2
+WHERE ssn = 1006;
+
+UPDATE employee 
+SET SUPERSSN = 1002, DNO = 2
+WHERE ssn = 1007;
+
+UPDATE employee 
+SET SUPERSSN = 1002, DNO = 2
+WHERE ssn = 1008;
+
+UPDATE employee 
+SET SUPERSSN = 1003, DNO = 2
+WHERE ssn = 1009;
+
+            </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- library_branch -->
+        <div class='code'>
+            <p class='text-size'>DLOCATION</p>
+            <pre class='pro1'>
+CREATE TABLE DLOCATION (
+  DNO INT REFERENCES DEPARTMENT(DNO), 
+  DLOC VARCHAR(10), 
+  PRIMARY KEY (DNO, DLOC)
+);
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <div class='code'>
+            <p class='text-size'>PROJECT</p>
+            <pre class='pro1'>
+CREATE TABLE PROJECT(
+  PNO INT PRIMARY KEY, 
+  PNAME VARCHAR(10) NOT NULL UNIQUE, 
+  PLOCATION VARCHAR(10) NOT NULL, 
+  DNO INT REFERENCES DEPARTMENT(DNO)
+);
+            </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+INSERT INTO project VALUES (10, 'iot', 'bangalore', 1);
+INSERT INTO project VALUES (11, 'android', 'new york', 5);
+INSERT INTO project VALUES (13, 'dm', 'pune', 5);
+INSERT INTO project VALUES (14, 'bigdata', 'noida', 3);
+INSERT INTO project VALUES (12,'web','goa',3);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <div class='code'>
+          <p class='text-size'>WORKS_ON</p>
+          <pre class='pro1'>
+CREATE TABLE WORKS_ON(
+  SSN INT REFERENCES EMPLOYEE(SSN), 
+  PNO INT REFERENCES PROJECT(PNO), 
+  HOURS INT, 
+  PRIMARY KEY(SSN, PNO)
+);
+          </pre>
+          <div class='copy-code-btn btn1'></div>
+      </div>
+      <div class='code'>
+          <pre class='pro1'>
+INSERT INTO works_on VALUES (1000, 10, 40);
+INSERT INTO works_on VALUES (1003, 11, 35);
+INSERT INTO works_on VALUES (1003, 12, 6);
+INSERT INTO works_on VALUES (1003, 13, 4);
+INSERT INTO works_on VALUES (1004, 11, 25);
+INSERT INTO works_on VALUES (1004, 12, 16);
+INSERT INTO works_on VALUES (1005, 13, 40);
+INSERT INTO works_on VALUES (1004, 13, 7);
+INSERT INTO works_on VALUES (1005, 12, 5);
+INSERT INTO works_on VALUES (1006, 11, 3);
+             </pre>
+          <div class='copy-code-btn btn1'></div>
+      </div>
+
+<!-- Q1 -->
+        <div class='code'>
+            <p class='text-size'>1.Make a list of all project numbers for projects that involve an employee whose last name is ‘Scott’, either as a worker or as a manager of the department that controls the project.
+
+            </p>
+            <pre class='pro1'>
+SELECT DISTINCT p.pno 
+FROM project p, department d, employee e 
+WHERE d.dno = p.dno AND mgrssn = ssn AND name LIKE '%ramya'
+UNION 
+SELECT DISTINCT p.pno 
+FROM project p, works_on w, employee e 
+WHERE p.pno = w.pno AND w.ssn = e.ssn AND name LIKE '%ramya'
+;              </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+<!-- Q2 -->
+        <div class='code'>
+            <p class='text-size'>2.Show the resulting salaries if every employee working on the ‘IoT’ project is given a 10 percent raise.</p>
+            <pre class='pro1'>
+SELECT e.name, ROUND(1.1 * e.salary) as incr_salary 
+FROM employee e, works_on w, project p 
+WHERE e.ssn = w.ssn AND w.pno = p.pno AND p.pname = 'iot';
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+<!-- Q3 -->
+<div class='code'>
+    <p class='text-size'>3.Find the sum of the salaries of all employees of the ‘Accounts’ department,
+      as well as the maximum salary, the minimum salary, and the average salary in this department</p>
+    <pre class='pro1'>
+select sum(salary),max(salary),min(salary),avg(salary) 
+from (employee e join department d on e.dno=d.dno) 
+where dname='accounts';   
+  </pre>
+    <div class='copy-code-btn btn1'></div>
+</div>
+
+<!-- 4 -->
+<div class='code'>
+  <p class='text-size'>4.Retrieve the name of each employee who works on all the projects controlledby department number 5 (use NOT EXISTS operator).</p>
+  <pre class='pro1'>
+SELECT E.NAME 
+FROM EMPLOYEE E 
+WHERE NOT EXISTS ( SELECT PNO FROM PROJECT WHERE DNO=5
+                  MINUS
+                  (SELECT PNO FROM WORKS_ON W WHERE W.SSN=E.SSN));
+ </pre>
+  <div class='copy-code-btn btn1'></div>
+</div>
+
+<!-- or if MINUS not supported -->
+<!-- <div class='code'>
+  <p class='text-size'>or if MINUS not supported</p>
+  <pre class='pro1'>
+------------------if MINUS not supported-----------------------------------------    
+SELECT E.NAME 
+FROM EMPLOYEE E 
+WHERE NOT EXISTS (
+    SELECT PNO FROM PROJECT 
+    WHERE DNO=5 
+    AND PNO NOT IN (SELECT PNO FROM WORKS_ON W WHERE W.SSN=E.SSN)
+);  
+----------------------------------------------------------------------------------
+</pre>
+  <div class='copy-code-btn btn1'></div>
+</div> -->
+
+<!-- Q5 -->
+        <div class='code'>
+            <p class='text-size'>5.For each department that has more than five employees, retrieve the department number and the number of its employees who are making more than Rs. 6,00,000.
+            </p>
+            <pre class='pro1'>
+SELECT E.DNO,COUNT(*)
+FROM DEPARTMENT D,EMPLOYEE E
+WHERE D.DNO=E.DNO AND SALARY>600000 
+	AND E.DNO IN (SELECT DNO 
+                  FROM EMPLOYEE 
+                  GROUP BY DNO 
+                  HAVING COUNT(DNO) >5) 
+GROUP BY E.DNO;
+  </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+
+        <!-- <div class='code'>
+            <pre class='pro1'>
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <p class='text-size'>Bellman-Ford Algorithm</p>
+            <pre class='pro2'>
+                        import java.io.*;
+                        import java.util.Scanner;
+                        
+                        class dist_vec {
+                            public static void main(String args[]) {
+                                int dmat[][];
+                        
+                                int dist[][];
+                                int via[][];
+                                int n = 0, i = 0, j = 0, k = 0, count = 0;
+                                Scanner in = new Scanner(System.in);
+                                System.out.println('enter the number of nodes\n');
+                                n = in.nextInt();
+                                dmat = new int[n][n];
+                                dist = new int[n][n];
+                                via = new int[n][n];
+                                System.out.println('enter the cost matrix\n');
+                                for (i = 0; i < n; i++)
+                                    for (j = 0; j < n; j++) {
+                                        dmat[i][j] = in.nextInt();
+                                        dmat[i][i] = 0;
+                                        dist[i][j] = dmat[i][j];
+                                        via[i][j] = j;
+                                    }
+                                do {
+                                    count = 0;
+                                    for (i = 0; i < n; i++)
+                                        for (j = 0; j < n; j++)
+                                            for (k = 0; k < n; k++)
+                                                if (dist[i][j] > dmat[i][k] + dist[k][j]) {
+                                                    dist[i][j] = dist[i][k] + dist[k][j];
+                                                    via[i][j] = k;
+                                                    count++;
+                                                }
+                                } while (count != 0);
+                                for (i = 0; i < n; i++) {
+                                    System.out.println('state value for router' + i + ' is');
+                                    for (j = 0; j < n; j++) {
+                                        System.out.println('To ' + j + ' -Via ' + via[i][j] +
+                                                ' distance is ' + dist[i][j]);
+                                    }
+                                }
+                            }
+                        }
+                        
+                </pre>
+            <div class='copy-code-btn btn2'></div>
+        </div> -->
+
+
+        
+    </div>
+    <script src='script.js'></script>
+</body>
+
+</html>

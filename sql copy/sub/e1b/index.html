@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>B Order Database</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+
+<body>
+    <div class='wrapper'>
+        <div class='head'>Exercise: B. Order Database</div>
+        <button class='head cpy-all'>👉click here to Copy full program👈</button>
+
+        <!-- Computer Network -->
+
+        <img src='./Picture1.png' alt=''>
+        <!-- <div class='cn'> -->
+        <!-- publisher -->
+        <div class='code'>
+            <p class='text-size'>SALESMAN</p>
+
+            <pre class='pro1'>
+create table SALESMAN(
+  Salesman_id int primary key, 
+  Name varchar2(20) not null, 
+  city varchar2(10), 
+  commission float
+);
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <div class='code'>
+            <pre class='pro1'>
+insert into SALESMAN values (1000,'adarsh','bangalore',2);
+insert into SALESMAN values (1001,'bharath','mysore',8);
+insert into SALESMAN values (1002,'chandru','bangalore',3);
+insert into SALESMAN values (1003,'dinesh','pune',1);
+insert into SALESMAN values (1004,'eshwar','chennai',9);
+insert into SALESMAN values (1005,'kiran','hyd',4);
+insert into SALESMAN values (1006,'raj','mumbai',5);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- book -->
+        <div class='code'>
+            <p class='text-size'>CUSTOMER</p>
+            <pre class='pro1'>
+create table CUSTOMER(
+  Customer_id int primary key, 
+  Cust_Name varchar(10) not null, 
+  City varchar(10), 
+  Grade float, 
+  Salesman_id int references salesman(Salesman_id) on delete 
+  set 
+    null
+);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+insert into CUSTOMER values (10,'farhan','bangalore',2,1000);
+insert into CUSTOMER values (11,'ganesh','bangalore',4,1000);
+insert into CUSTOMER values (12,'harsha','mysore',8,1001);
+insert into CUSTOMER values (13,'Indra','mysore',2,1001);
+insert into CUSTOMER values (14,'jagadish','pune',10,1003);
+insert into CUSTOMER values (15,'karthik','chennai',9,1004);
+insert into CUSTOMER values (16,'ram','mysore',4,1002);
+insert into CUSTOMER values (17,'mahesh','pune',8,1002);
+insert into CUSTOMER values (18,'akshay','chennai',8,1002);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- book_authors -->
+        <div class='code'>
+            <p class='text-size'>orders</p>
+            <pre class='pro1'>
+create table orders(
+  Ord_No int primary key, 
+  Purchase_Amt float, 
+  Ord_Date date, 
+  Customer_id int references CUSTOMER(Customer_id), 
+  Salesman_id int references SALESMAN(Salesman_id) on delete cascade
+);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+insert into orders values (1,10000,'12-MAR-10',10,1000);
+insert into orders values (2,20000,'12-MAR-10',11,1000);
+insert into orders values (3,40000,'12-MAR-10',12,1001);
+insert into orders values (4,15000,'10-JAN-10',13,1001);
+insert into orders values (5,5000,'10-JAN-10',14,1003);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+<!-- Q1 -->
+        <div class='code'>
+            <p class='text-size'>1.Count the customers with grades above Bangalore’s average.
+            </p>
+            <pre class='pro1'>
+SELECT 
+  grade, 
+  COUNT (DISTINCT customer_id) 
+FROM 
+  customer 
+GROUP BY 
+  grade 
+HAVING 
+  grade > (
+    SELECT 
+      AVG(grade) 
+    FROM 
+      customer 
+    WHERE 
+      city = 'bangalore'
+  );
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+<!-- Q2 -->
+        <div class='code'>
+            <p class='text-size'>2.Find the name and numbers of all salesman who had more than one customer.</p>
+            <pre class='pro1'>
+SELECT 
+  salesman_id, 
+  name 
+FROM 
+  salesman a 
+WHERE 
+  1 < (
+    SELECT 
+      COUNT(*) 
+    FROM 
+      customer 
+    WHERE 
+      salesman_id = a.salesman_id
+  );
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+<!-- Q3 -->
+<div class='code'>
+    <p class='text-size'>3.List all the salesman and indicate those who have and don’t have customers in their
+      cities (Use UNION operation.)</p>
+    <pre class='pro1'>
+SELECT 
+  salesman.salesman_id, 
+  name, 
+  cust_name, 
+  commission 
+FROM 
+  salesman, 
+  customer 
+WHERE 
+  salesman.city = customer.city 
+UNION 
+SELECT 
+  salesman_id, 
+  name, 
+  'NO MATCH', 
+  commission 
+FROM 
+  salesman 
+WHERE 
+  NOT city = ANY (
+    SELECT 
+      city 
+    FROM 
+      customer
+  ) 
+ORDER BY 
+  2 DESC; 
+        </pre>
+    <div class='copy-code-btn btn1'></div>
+</div>
+
+
+<!-- Q4 -->
+<div class='code'>
+            <p class='text-size'>4. Create a view that finds the salesman who has the customer with the highest order of
+              a day.</p>
+            <pre class='pro1'>
+CREATE VIEW elitsalesman AS 
+select 
+  s.salesman_id, 
+  s.name, 
+  PURCHASE_AMT, 
+  ord_date 
+from 
+  orders o, 
+  salesman s 
+where 
+  s.salesman_id = o.salesman_id 
+  and PURCHASE_AMT in(
+    SELECT 
+      MAX (Purchase_Amt) 
+    FROM 
+      orders 
+    group by 
+      ord_date
+  );
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+ select *from elitsalesman;
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+<!-- Q5 -->
+        <div class='code'>
+            <p class='text-size'>5. Demonstrate the DELETE operation by removing salesman with id 1000. All his
+              orders must also be deleted.</p>
+            <pre class='pro1'>
+delete from 
+  salesman 
+where 
+  salesman_id = 1000;
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <div class='code'>
+          <pre class='pro1'>
+select * from salesman;
+              </pre>
+          <div class='copy-code-btn btn1'></div>
+      </div>
+      <div class='code'>
+        <pre class='pro1'>
+select * from order;
+            </pre>
+        <div class='copy-code-btn btn1'></div>
+    </div>
+    <div class='code'>
+      <pre class='pro1'>
+select * from customer;
+          </pre>
+      <div class='copy-code-btn btn1'></div>
+  </div>
+
+
+
+        
+    </div>
+    <script src='script.js'></script>
+</body>
+
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>C Movie Database</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+
+<body>
+    <div class='wrapper'>
+        <div class='head'>Exercise : c. Movie Database</div>
+        <button class='head cpy-all'>👉click here to Copy full program👈</button>
+
+        
+        <img src='./Image_016.jpg' alt=''>
+
+        <div class='code'>
+            <p class='text-size'>actor</p>
+
+            <pre class='pro1'>
+create table actor(
+  act_id varchar2(4) primary key, 
+  act_name varchar2(20) not null, 
+  act_gender varchar(6)
+);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <div class='code'>
+            <pre class='pro1'>
+insert into actor values ('a1','sharuk','male');
+insert into actor values ('a2','amir','male');
+insert into actor values ('a3','salman','male');
+insert into actor values ('a4','madhuri','female');
+insert into actor values ('a5','priyanka','female');
+insert into actor values ('a6','nasir','male');
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- book -->
+        <div class='code'>
+            <p class='text-size'>director</p>
+            <pre class='pro1'>
+create table director(
+  dir_id varchar2(4) primary key, 
+  dir_name varchar2(20) not null, 
+  dir_phone number(11)
+);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+insert into director values ('d1','hitchcock',9845612345);
+insert into director values ('d2','steven spielberg',9845612346);
+insert into director values ('d3','karan',9845612347);
+insert into director values ('d4','ramgopal',9845612348);
+insert into director values ('d5','anurag',9845612349);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- book_authors -->
+        <div class='code'>
+            <p class='text-size'>movies</p>
+            <pre class='pro1'>
+create table movies(
+  mov_id varchar2(4) primary key, 
+  mov_title varchar(20) not null, 
+  mov_year int, 
+  mov_lang varchar2(10), 
+  dir_id varchar2(4) references director(dir_id)
+);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+insert into movies values ('m1','ddlj',1999,'hindi','d1');
+insert into movies values ('m2','bazigar',2002,'hindi','d2');
+insert into movies values ('m3','darr',2016,'hindi','d1');
+insert into movies values ('m4','dil',1990,'hindi','d2');
+insert into movies values ('m5','pk',2016,'hindi','d3');
+insert into movies values ('m6','sulthan',2016,'hindi','d1');
+insert into movies values ('m7','devdas',2002,'hindi','d4');
+insert into movies values ('m8','marykom',2016,'hindi','d3');
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- library_branch -->
+        <div class='code'>
+            <p class='text-size'>movie_cast</p>
+            <pre class='pro1'>
+create table movie_cast(
+  act_id varchar2(4) references actor(act_id), 
+  mov_id varchar2(4) references movies(mov_id), 
+  role varchar2(10), 
+  primary key(act_id, mov_id)
+);
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+insert into movie_cast values ('a1','m1','hero');
+insert into movie_cast values ('a1','m2','hero');
+insert into movie_cast values ('a1','m3','hero');
+insert into movie_cast values ('a2','m4','hero');
+insert into movie_cast values ('a2','m5','costar');
+insert into movie_cast values ('a3','m6','hero');
+insert into movie_cast values ('a4','m7','heroine');
+insert into movie_cast values ('a5','m1','costar');
+insert into movie_cast values ('a6','m1','support');
+insert into movie_cast values ('a4','m2','heroine');
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- book_copies -->
+        <div class='code'>
+            <p class='text-size'>rating</p>
+            <pre class='pro1'>
+create table rating(
+  mov_id varchar2(4) references movies(mov_id), 
+  rev_stars number(5, 2), 
+  primary key(mov_id)
+);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+insert into rating values ('m1',0.1);
+insert into rating values ('m2',2);
+insert into rating values ('m3',4);
+insert into rating values ('m5',6);
+insert into rating values ('m6',0.5);
+insert into rating values ('m7',1);
+insert into rating values ('m8',0.4);
+insert into rating values ('m4',0.2);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+<!-- Q1 -->
+        <div class='code'>
+            <p class='text-size'>1.List the titles of all movies directed by ‘Hitchcock’. </p>
+            <pre class='pro1'>
+select 
+  m.mov_id, 
+  m.mov_title, 
+  m.dir_id, 
+  d.dir_name 
+from 
+  movies m, 
+  director d 
+where 
+  m.dir_id = d.dir_id 
+  and d.dir_name = 'hitchcock';
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+<!-- Q2 -->
+        <div class='code'>
+            <p class='text-size'>2.Find the movie names where one or more actors acted in two or more movies.</p>
+            <pre class='pro1'>
+SELECT 
+  mov_title, 
+  act_name, 
+  role 
+FROM 
+  movies 
+  JOIN movie_cast ON movie_cast.mov_id = movies.mov_id 
+  JOIN actor ON movie_cast.act_id = actor.act_id 
+WHERE 
+  actor.act_id IN (
+    SELECT 
+      act_id 
+    FROM 
+      movie_cast 
+    GROUP BY 
+      act_id 
+    HAVING 
+      COUNT(*)>= 2
+  );
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+<!-- Q3 -->
+<div class='code'>
+    <p class='text-size'>3.List all actors who acted in a movie before 2000 and also in a movie after 2015 (use JOIN operation).</p>
+    <pre class='pro1'>
+(
+  SELECT 
+    a.act_id, 
+    a.act_name 
+  FROM 
+    actor a 
+    JOIN movie_cast ON a.act_id = movie_cast.act_id 
+    JOIN movies ON movie_cast.mov_id = movies.mov_id 
+  WHERE 
+    mov_year < 2000
+) 
+intersect 
+  (
+    SELECT 
+      a.act_id, 
+      a.act_name 
+    FROM 
+      actor a 
+      JOIN movie_cast ON a.act_id = movie_cast.act_id 
+      JOIN movies ON movie_cast.mov_id = movies.mov_id 
+    WHERE 
+      mov_year > 2015
+  );
+
+        </pre>
+    <div class='copy-code-btn btn1'></div>
+</div>
+
+
+<!-- Q4 -->
+<div class='code'>
+            <p class='text-size'>4.Find the title of movies and number of stars for each movie that has at least one rating and find the highest number of stars that movie received. Sort the result by movie title.</p>
+            <pre class='pro1'>
+select 
+  m.mov_id, 
+  m.mov_title, 
+  MAX(rev_stars) 
+from 
+  Rating 
+  join Movies m on m.mov_id = Rating.mov_id 
+  and rating.rev_stars >= 1 
+group by 
+  m.mov_id, 
+  m.mov_title 
+order by 
+  m.mov_title;
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+<!-- Q5 -->
+        <div class='code'>
+            <p class='text-size'>5.Update rating of all movies directed by ‘Steven Spielberg’ to 5.</p>
+            <pre class='pro1'>
+Update 
+  rating 
+set 
+  rev_stars = 5 
+where 
+  mov_id in(
+    select 
+      m.mov_id 
+    from 
+      movies m, 
+      director d 
+    where 
+      d.dir_id = m.dir_id 
+      and d.dir_name = 'steven spielberg'
+  );
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+
+
+        <!-- <div class='code'>
+            <pre class='pro1'>
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <p class='text-size'>Bellman-Ford Algorithm</p>
+            <pre class='pro2'>
+                        import java.io.*;
+                        import java.util.Scanner;
+                        
+                        class dist_vec {
+                            public static void main(String args[]) {
+                                int dmat[][];
+                        
+                                int dist[][];
+                                int via[][];
+                                int n = 0, i = 0, j = 0, k = 0, count = 0;
+                                Scanner in = new Scanner(System.in);
+                                System.out.println('enter the number of nodes\n');
+                                n = in.nextInt();
+                                dmat = new int[n][n];
+                                dist = new int[n][n];
+                                via = new int[n][n];
+                                System.out.println('enter the cost matrix\n');
+                                for (i = 0; i < n; i++)
+                                    for (j = 0; j < n; j++) {
+                                        dmat[i][j] = in.nextInt();
+                                        dmat[i][i] = 0;
+                                        dist[i][j] = dmat[i][j];
+                                        via[i][j] = j;
+                                    }
+                                do {
+                                    count = 0;
+                                    for (i = 0; i < n; i++)
+                                        for (j = 0; j < n; j++)
+                                            for (k = 0; k < n; k++)
+                                                if (dist[i][j] > dmat[i][k] + dist[k][j]) {
+                                                    dist[i][j] = dist[i][k] + dist[k][j];
+                                                    via[i][j] = k;
+                                                    count++;
+                                                }
+                                } while (count != 0);
+                                for (i = 0; i < n; i++) {
+                                    System.out.println('state value for router' + i + ' is');
+                                    for (j = 0; j < n; j++) {
+                                        System.out.println('To ' + j + ' -Via ' + via[i][j] +
+                                                ' distance is ' + dist[i][j]);
+                                    }
+                                }
+                            }
+                        }
+                        
+                </pre>
+            <div class='copy-code-btn btn2'></div>
+        </div> -->
+
+
+        
+    </div>
+    <script src='script.js'></script>
+</body>
+
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>D College Database</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+
+<body>
+    <div class='wrapper'>
+        <div class='head'>Exercise-D. College Database</div>
+        <button class='head cpy-all'>👉click here to Copy full program👈</button>
+
+
+        <img src='./Image_018.jpg' alt=''>
+   
+        <div class='code'>
+            <p class='text-size'>student</p>
+
+            <pre class='pro1'>
+create table student(
+  usn varchar(11) primary key,
+  Sname varchar(20) not null,
+  address varchar(30),
+  phone number(10),
+  gender varchar(6)
+);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <div class='code'>
+            <pre class='pro1'>
+INSERT INTO student values  ('1va12cs001', 'anwar', 'blore', '9845611111', 'male');
+INSERT INTO student values ('1va12cs002', 'bharath', 'mysore', '9845611112', 'male');
+INSERT INTO student values ('1va12cs003', 'chaithra', 'hubli', '9845611113', 'female');
+INSERT INTO student values ('1va13cs004', 'daniel', 'blore', '9845611114', 'male');
+INSERT INTO student values ('1bi15cs101', 'rajesh', 'pune', '9845611115', 'male');
+INSERT INTO student values ('1bi15cs102', 'gayathri', 'blore', '9845611116', 'female');
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- book -->
+        <div class='code'>
+            <p class='text-size'>semsec</p>
+            <pre class='pro1'>
+create table semsec(
+  ssid varchar(5) primary key,
+  sem int,
+  sec varchar(5)
+);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+INSERT INTO semsec values ('s1', 4, 'c');
+INSERT INTO semsec values ('s2', 8, 'a');
+INSERT INTO semsec values ('s3', 8, 'b');
+INSERT INTO semsec values ('s4', 8, 'c');
+INSERT INTO semsec values ('s5', 5, 'a');
+INSERT INTO semsec values ('s6', 5, 'b');
+INSERT INTO semsec values ('s7', 4, 'b');
+INSERT INTO semsec values ('s8', 4, 'a');
+             </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- book_authors -->
+        <div class='code'>
+            <p class='text-size'>clas</p>
+            <pre class='pro1'>
+create table clas(
+  usn varchar(11) references student(usn),
+  ssid varchar(5) references semsec(ssid),
+  primary key(usn, ssid)
+);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+INSERT INTO clas values ('1bi15cs101', 's5');
+INSERT INTO clas values ('1bi15cs102', 's3');
+INSERT INTO clas values ('1va12cs001', 's1');
+INSERT INTO clas values ('1va12cs002', 's2');
+INSERT INTO clas values ('1va12cs003', 's3');
+INSERT INTO clas values ('1va13cs004', 's4');
+             </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- library_branch -->
+        <div class='code'>
+            <p class='text-size'>subject</p>
+            <pre class='pro1'>
+create table subject(
+  subcode varchar(7) primary key,
+  title varchar(10),
+  sem int,
+  credits float
+);
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+INSERT INTO subject values ('10cs51', 'me', 5, 4);
+INSERT INTO subject values ('10cs52', 'dbms', 5, 4);
+INSERT INTO subject values ('10cs81', 'aca', 8, 3);
+INSERT INTO subject values ('10cs82', 'nm', 8, 3);
+INSERT INTO subject values ('10cs83', 'dos', 8, 3);
+INSERT INTO subject values ('10cs41', 'ada', 4, 4);
+INSERT INTO subject values ('10cs42', 'c++', 4, 4);
+         </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <!-- book_copies -->
+        <div class='code'>
+            <p class='text-size'>iamarks</p>
+            <pre class='pro1'>
+create table iamarks(
+  usn varchar(11) references student(usn),
+  subcode varchar(7) references subject(subcode),
+  ssid varchar(5) references semsec(ssid),
+  test1 number(6, 3),
+  test2 number(6, 3),
+  test3 number(6, 3),
+  primary key(usn,subcode,ssid)
+);             </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+INSERT INTO iamarks values ('1va12cs001', '10cs41', 's7', 11, 15, 18);
+INSERT INTO iamarks values ('1va12cs001', '10cs42', 's6', 13, 19, 12);
+INSERT INTO iamarks values ('1bi15cs101', '10cs51', 's5', 19, 20, 12);
+INSERT INTO iamarks values ('1bi15cs101', '10cs52', 's5', 12, 14, 16);
+INSERT INTO iamarks values ('1va12cs002', '10cs81', 's2', 16, 17, 18);
+INSERT INTO iamarks values ('1va12cs002', '10cs82', 's2', 12, 16, 15);
+INSERT INTO iamarks values ('1va12cs002', '10cs83', 's2', 16, 18, 20);
+INSERT INTO iamarks values ('1va12cs003', '10cs81', 's3', 14, 12, 11);
+INSERT INTO iamarks values ('1va12cs003', '10cs82', 's3', 12, 11, 16);
+INSERT INTO iamarks values ('1va12cs003', '10cs83', 's3', 18, 12, 10);
+INSERT INTO iamarks values ('1va13cs004', '10cs81', 's4', 16, 12, 11);
+              </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+        <div class='code'>
+          <pre class='pro1'>
+alter table iamarks
+add finalIA number(6,3);
+            </pre>
+          <div class='copy-code-btn btn1'></div>
+      </div>
+
+<!-- Q1 -->
+        <div class='code'>
+            <p class='text-size'>1.List all the student details studying in fourth semester ‘C’ section.
+
+            </p>
+            <pre class='pro1'>
+select
+  s.usn,
+  s.sname,
+  s.address,
+  s.phone,
+  s.gender,
+  u.sem,
+  u.sec
+from
+  student s,
+  clas c,
+  semsec u
+where
+  s.usn = c.usn
+  and u.ssid = c.ssid
+  and u.sem = 4
+  and u.sec = 'c';
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+<!-- Q2 -->
+        <div class='code'>
+            <p class='text-size'>2.Compute the total number of male and female students in each semester and in each section.</p>
+            <pre class='pro1'>
+select
+  u.sem,
+  u.sec,
+  s.gender,
+  count(*)
+from
+  student s,
+  semsec u,
+  clas c
+where
+  s.usn = c.usn
+  and c.ssid = u.ssid
+group by
+  u.sem,
+  u.sec,
+  s.gender;
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+
+<!-- Q3 -->
+<div class='code'>
+    <p class='text-size'>3.Create a view of Test1 marks of student USN ‘1BI15CS101’ in all subjects.</p>
+    <pre class='pro1'>
+create view TEST1_MARKS_OF_1bi15cs101(
+  usn, name, subcode, title, test1_marks
+) as
+select
+  s.usn,
+  s.sname,
+  i.subcode,
+  sub.title,
+  i.test1
+from
+  student s,
+  iamarks i,
+  subject sub
+where
+  s.usn = i.usn
+  and i.subcode = sub.subcode
+  and s.usn = '1bi15cs101';
+
+select *from TEST1_MARKS_OF_1bi15cs101; 
+        </pre>
+    <div class='copy-code-btn btn1'></div>
+</div>
+
+
+<!-- Q4 -->
+<div class='code'>
+            <p class='text-size'>4.Calculate the FinalIA (average of best two test marks) and update the corresponding table for all students.</p>
+            <pre class='pro1'>
+update
+  iamarks
+set
+  finalia = case when (test1 < test2 and test1 < test3) 
+                 then ceil((test2 + test3)/ 2) 
+            when (test2 < test1 and test2 < test3) 
+                  then ceil((test1 + test3)/ 2) 
+            else ceil((test1 + test2)/ 2) 
+            end;
+
+select *from iamarks;
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        
+
+<!-- Q5 -->
+        <div class='code'>
+            <p class='text-size'>5.Categorize students based on the following criterion: If FinalIA = 17 to 20 then CAT
+              = ‘Outstanding’
+              If FinalIA = 12 to 16 then CAT = ‘Average’ If FinalIA< 12 then CAT = ‘Weak’
+              Give these details only for 8th semester A, B, and C section students.</p>
+            <pre class='pro1'>
+select
+  s.usn,
+  s.sname,
+  sec.sem,
+  sec.sec,
+  i.subcode,
+  i.finalia,
+  case when (I.finalia >= 17 and i.finalia <= 20) 
+        then 'outstanding' 
+      when ( i.finalia >= 12and i.finalia <= 16) 
+        then 'average' 
+      when (i.finalia < 12) 
+        then 'weak' 
+      else 'un_known'
+  end cat
+from
+  student s,
+  iamarks i,
+  semsec sec
+where
+  s.usn = i.usn
+  and i.ssid = sec.ssid
+  and sec.sem = 8
+  and sec.sec in('a', 'b', 'c')
+order by
+  cat;
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+<!-- 
+        <div class='code'>
+          <pre class='pro1'>
+-----------------------------------------------------------------------------------------------------------------
+              </pre>
+          <div class='copy-code-btn btn1'></div>
+      </div>
+
+      <div class='code'>
+        <pre class='pro1'>
+update
+  iamarks3
+set
+  test1 = 10,
+  test2 = 9,
+  test3 = 8
+where
+  usn = '1va12cs002'
+  and subcode = '10cs81';
+            </pre>
+        <div class='copy-code-btn btn1'></div>
+    </div>
+
+    <div class='code'>
+      <pre class='pro1'>
+update
+  iamarks3
+set
+  test1 = 10,
+  test2 = 6,
+  test3 = 7
+where
+  usn = '1va12cs003'
+  and subcode = '10cs83';
+
+select * from iamarks3;
+          </pre>
+      <div class='copy-code-btn btn1'></div>
+  </div>
+  <div class='code'>
+    <pre class='pro1'>
+update
+  iamarks3
+set
+  finalia = case when (
+    test1 < test2
+    and test1 < test3
+  ) then ceil(
+    (test2 + test3)/ 2
+  ) when (
+    test2 < test1
+    and test2 < test3
+  ) then ceil(
+    (test1 + test3)/ 2
+  ) else ceil(
+    (test1 + test2)/ 2
+  ) end;
+
+select * from iamarks3;
+        </pre>
+    <div class='copy-code-btn btn1'></div>
+</div>
+
+<div class='code'>
+  <pre class='pro1'>
+select
+  s.usn,
+  s.sname,
+  sec.sem,
+  sec.sec,
+  i.subcode,
+  i.finalia,
+  case when (
+    I.finalia >= 17
+    and i.finalia <= 20
+  ) then 'outstanding' when (
+    i.finalia >= 12
+    and i.finalia <= 16
+  ) then 'average' when (i.finalia < 12) then 'weak' else 'un_known' end cat
+from
+  student3 s,
+  iamarks3 i,
+  semsec3 sec
+where
+  s.usn = i.usn
+  and i.ssid = sec.ssid
+  and sec.sem = 8
+  and sec.sec in('a', 'b', 'c')
+order by
+  cat;
+      </pre>
+  <div class='copy-code-btn btn1'></div>
+</div> -->
+
+
+        <!-- <div class='code'>
+            <pre class='pro1'>
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <pre class='pro1'>
+
+                </pre>
+            <div class='copy-code-btn btn1'></div>
+        </div>
+        <div class='code'>
+            <p class='text-size'>Bellman-Ford Algorithm</p>
+            <pre class='pro2'>
+                        import java.io.*;
+                        import java.util.Scanner;
+                        
+                        class dist_vec {
+                            public static void main(String args[]) {
+                                int dmat[][];
+                        
+                                int dist[][];
+                                int via[][];
+                                int n = 0, i = 0, j = 0, k = 0, count = 0;
+                                Scanner in = new Scanner(System.in);
+                                System.out.println('enter the number of nodes\n');
+                                n = in.nextInt();
+                                dmat = new int[n][n];
+                                dist = new int[n][n];
+                                via = new int[n][n];
+                                System.out.println('enter the cost matrix\n');
+                                for (i = 0; i < n; i++)
+                                    for (j = 0; j < n; j++) {
+                                        dmat[i][j] = in.nextInt();
+                                        dmat[i][i] = 0;
+                                        dist[i][j] = dmat[i][j];
+                                        via[i][j] = j;
+                                    }
+                                do {
+                                    count = 0;
+                                    for (i = 0; i < n; i++)
+                                        for (j = 0; j < n; j++)
+                                            for (k = 0; k < n; k++)
+                                                if (dist[i][j] > dmat[i][k] + dist[k][j]) {
+                                                    dist[i][j] = dist[i][k] + dist[k][j];
+                                                    via[i][j] = k;
+                                                    count++;
+                                                }
+                                } while (count != 0);
+                                for (i = 0; i < n; i++) {
+                                    System.out.println('state value for router' + i + ' is');
+                                    for (j = 0; j < n; j++) {
+                                        System.out.println('To ' + j + ' -Via ' + via[i][j] +
+                                                ' distance is ' + dist[i][j]);
+                                    }
+                                }
+                            }
+                        }
+                        
+                </pre>
+            <div class='copy-code-btn btn2'></div>
+        </div> -->
+
+
+        
+    </div>
+    <script src='script.js'></script>
+</body>
+
+</html>
