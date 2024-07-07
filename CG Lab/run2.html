@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixing Dependency Issues</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background-color: #333;
+            color: #eee;
+        }
+        code {
+            background-color: #444;
+            padding: 2px 6px;
+            border: 1px solid #555;
+            border-radius: 3px;
+            display: inline-block;
+            margin: 5px 0;
+        }
+        .copy-button {
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin-left: 10px;
+        }
+        .copy-button:hover {
+            background-color: #0056b3;
+        }
+        .step {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Fixing Dependency Issues</h2>
+    
+    <div class="step">
+        <p>1. Download the correct versions of the required packages:</p>
+        <pre><code>wget http://ftp.debian.org/debian/pool/main/m/mesa/libglapi-mesa_22.3.6-1+deb12u1_amd64.deb</code></pre>
+        <button class="copy-button" onclick="copyCommand('wget http://ftp.debian.org/debian/pool/main/m/mesa/libglapi-mesa_22.3.6-1+deb12u1_amd64.deb')">Copy code</button>
+    </div>
+    
+    <div class="step">
+        <p>2. Forcefully install the downloaded package:</p>
+        <pre><code>sudo dpkg -i --force-overwrite libglapi-mesa_22.3.6-1+deb12u1_amd64.deb</code></pre>
+        <button class="copy-button" onclick="copyCommand('sudo dpkg -i --force-overwrite libglapi-mesa_22.3.6-1+deb12u1_amd64.deb')">Copy code</button>
+    </div>
+    
+    <div class="step">
+        <p>3. Fix broken dependencies:</p>
+        <pre><code>sudo apt --fix-broken install</code></pre>
+        <button class="copy-button" onclick="copyCommand('sudo apt --fix-broken install')">Copy code</button>
+    </div>
+    
+    <div class="step">
+        <p>4. Install the required packages:</p>
+        <pre><code>sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev libglut-dev</code></pre>
+        <button class="copy-button" onclick="copyCommand('sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev libglut-dev')">Copy code</button>
+    </div>
+    
+    <script>
+        function copyCommand(command) {
+            navigator.clipboard.writeText(command)
+                .then(() => {
+                    alert('Command copied to clipboard: ' + command);
+                })
+                .catch(err => {
+                    console.error('Could not copy command: ', err);
+                    alert('Failed to copy command. Please try again.');
+                });
+        }
+    </script>
+</body>
+</html>
