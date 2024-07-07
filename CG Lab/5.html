@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Cube Transformations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            position: relative;
+        }
+        code {
+            display: block;
+            white-space: pre-wrap;
+            /* background: hsl(220, 80%, 90%); */
+            padding: 10px;
+            border-radius: 5px;
+            font-size: large;
+
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>3D Cube Transformations with Python</h1>
+    <pre>
+        <code id="code-block">
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+# Define the vertices of a cube
+cube_vertices = np.array([
+    [0, 0, 0],
+    [1, 0, 0],
+    [1, 1, 0],
+    [0, 1, 0],
+    [0, 0, 1],
+    [1, 0, 1],
+    [1, 1, 1],
+    [0, 1, 1]
+])
+
+# Function to plot a 3D cube
+def plot_cube(vertices, title):
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # Draw edges
+    for i in range(4):
+        ax.plot3D(*zip(vertices[i], vertices[(i+1)%4]), color='b')
+        ax.plot3D(*zip(vertices[i+4], vertices[((i+1)%4)+4]), color='b')
+        ax.plot3D(*zip(vertices[i], vertices[i+4]), color='b')
+
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+    ax.set_title(title)
+    plt.show()
+
+
+# Translation: Move the cube by (tx, ty, tz)
+def translate(vertices, tx, ty, tz):
+    translation_matrix = np.array([[1, 0, 0, tx],
+                                   [0, 1, 0, ty],
+                                   [0, 0, 1, tz],
+                                   [0, 0, 0, 1]])
+    homogeneous_vertices = np.hstack((vertices, np.ones((vertices.shape[0], 1))))
+    translated_vertices = np.dot(translation_matrix, homogeneous_vertices.T).T[:, :3]
+    return translated_vertices
+
+# Rotation: Rotate the cube by angles (rx, ry, rz) around the x, y, and z axes respectively
+def rotate(vertices, rx, ry, rz):
+    rotation_matrix_x = np.array([[1, 0, 0],
+                                  [0, np.cos(rx), -np.sin(rx)],
+                                  [0, np.sin(rx), np.cos(rx)]])
+    rotation_matrix_y = np.array([[np.cos(ry), 0, np.sin(ry)],
+                                  [0, 1, 0],
+                                  [-np.sin(ry), 0, np.cos(ry)]])
+    rotation_matrix_z = np.array([[np.cos(rz), -np.sin(rz), 0],
+                                  [np.sin(rz), np.cos(rz), 0],
+                                  [0, 0, 1]])
+
+    rotation_matrix = np.dot(rotation_matrix_z, np.dot(rotation_matrix_y, rotation_matrix_x))
+    rotated_vertices = np.dot(rotation_matrix, vertices.T).T
+    return rotated_vertices
+
+# Scaling: Scale the cube by factors (sx, sy, sz) along the x, y, and z axes respectively
+def scale(vertices, sx, sy, sz):
+    scaling_matrix = np.array([[sx, 0, 0],
+                               [0, sy, 0],
+                               [0, 0, sz]])
+    scaled_vertices = np.dot(vertices, scaling_matrix.T)
+    return scaled_vertices
+
+# Reflection: Reflect the cube about the xy, yz, or zx plane
+def reflect(vertices, plane='xy'):
+    reflection_matrix = np.eye(3)
+    if 'x' in plane:
+        reflection_matrix[0, 0] = -1
+    if 'y' in plane:
+        reflection_matrix[1, 1] = -1
+    if 'z' in plane:
+        reflection_matrix[2, 2] = -1
+    reflected_vertices = np.dot(vertices, reflection_matrix)
+    return reflected_vertices
+
+# Plot the original cube
+plot_cube(cube_vertices, "Original Cube")
+
+# Translate the cube
+translated_cube = translate(cube_vertices, 1, 1, 1)
+plot_cube(translated_cube, "Translated Cube")
+
+# Rotate the cube
+rotated_cube = rotate(cube_vertices, np.pi/4, np.pi/4, np.pi/4)
+plot_cube(rotated_cube, "Rotated Cube")
+
+# Scale the cube
+scaled_cube = scale(cube_vertices, 2, 0.5, 1.5)
+plot_cube(scaled_cube, "Scaled Cube")
+
+# Reflect the cube about the xy plane
+reflected_cube = reflect(cube_vertices, 'xy')
+plot_cube(reflected_cube, "Reflected Cube (about xy-plane)")
+
+# Reflect the cube about the yz plane
+reflected_cube_yz = reflect(cube_vertices, 'yz')
+plot_cube(reflected_cube_yz, "Reflected Cube (about yz-plane)")
+
+# Reflect the cube about the zx plane
+reflected_cube_zx = reflect(cube_vertices, 'zx')
+plot_cube(reflected_cube_zx, "Reflected Cube (about zx-plane)")
+        </code>
+        <button class="copy-btn" onclick="copyCode()">Copy</button>
+    </pre>
+    <script>
+        function copyCode() {
+            const codeBlock = document.getElementById('code-block');
+            const textArea = document.createElement('textarea');
+            textArea.value = codeBlock.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('Code copied to clipboard!');
+        }
+    </script>
+</body>
+</html>
