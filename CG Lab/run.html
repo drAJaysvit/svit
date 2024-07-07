@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixing Dependency Issues</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 6px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .copy-button {
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Fixing Dependency Issues</h2>
+    
+    <p>To resolve dependency issues caused by mismatched versions of libglapi-mesa, follow these steps:</p>
+    
+    <ol>
+        <li>
+            <p>Fix broken packages:</p>
+            <pre><code>sudo apt --fix-broken install</code></pre>
+            <button class="copy-button" onclick="copyCommand('sudo apt --fix-broken install')">Copy</button>
+        </li>
+        <li>
+            <p>Install the correct version of libglapi-mesa (since we previously installed the wrong version manually):</p>
+            <pre><code>wget http://ftp.debian.org/debian/pool/main/m/mesa/libglapi-mesa_24.0.8-1_amd64.deb<br>sudo dpkg -i libglapi-mesa_24.0.8-1_amd64.deb</code></pre>
+            <button class="copy-button" onclick="copyCommand('wget http://ftp.debian.org/debian/pool/main/m/mesa/libglapi-mesa_24.0.8-1_amd64.deb\nsudo dpkg -i libglapi-mesa_24.0.8-1_amd64.deb')">Copy</button>
+        </li>
+        <li>
+            <p>Try installing libglut-dev manually:</p>
+            <pre><code>sudo apt-get install libglut-dev</code></pre>
+            <button class="copy-button" onclick="copyCommand('sudo apt-get install libglut-dev')">Copy</button>
+        </li>
+        <li>
+            <p>Finally, try installing the desired packages again:</p>
+            <pre><code>sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev</code></pre>
+            <button class="copy-button" onclick="copyCommand('sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev')">Copy</button>
+        </li>
+        <li>
+            <p>To Compile the program</p>
+            <pre><code>gcc example.c -lglut -lGLU -lGL</code></pre>
+            <button class="copy-button" onclick="copyCommand('gcc example.c -lglut -lGLU -lGL')">Copy</button>
+        </li>
+        <li>
+            <p>To run the program</p>
+            <pre><code>./a.out</code></pre>
+            <button class="copy-button" onclick="copyCommand('./a.out')">Copy</button>
+        </li>
+    </ol>
+    
+    <script>
+        function copyCommand(command) {
+            navigator.clipboard.writeText(command)
+                .then(() => {
+                    alert('Command copied to clipboard: ' + command);
+                })
+                .catch(err => {
+                    console.error('Could not copy command: ', err);
+                    alert('Failed to copy command. Please try again.');
+                });
+        }
+    </script>
+</body>
+</html>
