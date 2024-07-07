@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polygon Transformations in Python</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            position: relative;
+        }
+        code {
+            display: block;
+            white-space: pre-wrap;
+            /* background: hsl(220, 80%, 90%); */
+            font-size: large;
+
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Polygon Transformations in Python</h1>
+    <pre>
+        <code id="code-block">
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Polygon
+
+# Define a square as a list of vertices (x,y)
+square_vertices = np.array([[0,0],[1,0],[1,1],[0,1],[0,0]])
+# square_vertices = np.array([[6,6],[10,6],[10,10],[6,10],[6,6]])
+
+# Function to plot a polygon
+def plot_polygon(vertices, title):
+    fig, ax = plt.subplots()
+    ax.add_patch(Polygon(vertices, closed=True, fill=True, edgecolor='darkgreen'))
+    ax.set_aspect('equal', 'box')
+    ax.set_xlim(-2, 2)
+    ax.set_ylim(-2, 2)
+    ax.set_title(title)
+    ax.grid(True)
+    plt.show()
+
+# Translation: Move the square by (tx,ty)
+def translate(vertices, tx, ty):
+    return vertices + np.array([tx, ty])
+
+# Rotation
+def rotate(vertices, theta):
+    rotation_matrix = np.array([[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]])
+    return np.dot(vertices, rotation_matrix)
+
+# Scaling
+def scale(vertices, sx, sy):
+    return vertices * np.array([sx, sy])
+
+# Reflection
+def reflect(vertices, axis='x'):
+    if axis == 'x':
+        reflection_matrix = np.array([[1, 0], [0, -1]])
+    elif axis == 'y':
+        reflection_matrix = np.array([[-1, 0], [0, 1]])
+    else:
+        raise ValueError("Axis must be 'x' or 'y'")
+    return np.dot(vertices, reflection_matrix)
+
+# Plot the original square
+plot_polygon(square_vertices, "Original Square")
+
+# Plot the translated square
+translated_square = translate(square_vertices, 1, 1)
+plot_polygon(translated_square, "Translated Square")
+
+# Plot the rotated square
+rotated_square = rotate(square_vertices, np.pi/4)  # Rotate by 45 degrees
+plot_polygon(rotated_square, "Rotated Square")
+
+# Plot the scaled square
+scaled_square = scale(square_vertices, 2, 2)
+plot_polygon(scaled_square, "Scaled Square")
+
+# Plot the reflected square (x-axis)
+reflected_x_square = reflect(square_vertices, axis='x')
+plot_polygon(reflected_x_square, "Reflected Square (X-Axis)")
+
+# Plot the reflected square (y-axis)
+reflected_y_square = reflect(square_vertices, axis='y')
+plot_polygon(reflected_y_square, "Reflected Square (Y-Axis)")
+        </code>
+        <button class="copy-btn" onclick="copyCode()">Copy</button>
+    </pre>
+    <script>
+        function copyCode() {
+            const codeBlock = document.getElementById('code-block');
+            const textArea = document.createElement('textarea');
+            textArea.value = codeBlock.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert('Code copied to clipboard!');
+        }
+    </script>
+</body>
+</html>
