@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bouncing Ball Animation with Pygame</title>
+    <title>OpenCV Image Processing</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,11 +19,9 @@
         code {
             display: block;
             white-space: pre-wrap;
-            /* background: hsl(220, 80%, 90%); */
             padding: 10px;
             border-radius: 5px;
             font-size: large;
-
         }
         .copy-btn {
             position: absolute;
@@ -42,67 +40,35 @@
     </style>
 </head>
 <body>
-    <h1>Bouncing Ball Animation with Pygame</h1>
+    <h1>9.OpenCV Image Processing</h1>
     <pre>
-        <code id="code-block">
-import pygame
-import sys
-
-# Initialize Pygame
-pygame.init()
-
-# Set up display
-screen_width = 800
-screen_height = 600
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption('Bouncing Ball Animation')
-
-# Define colors
-black = (0, 0, 0)
-white = (255, 255, 255)
-
-# Define ball properties
-ball_size = 20
-ball_pos = [screen_width // 2, screen_height // 2]
-ball_speed = [5, 5]
-
-# Clock object to control the frame rate
-clock = pygame.time.Clock()
-
-# Main loop
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    # Move the ball
-    ball_pos[0] += ball_speed[0]
-    ball_pos[1] += ball_speed[1]
-
-    # Bounce the ball off the walls
-    if ball_pos[0] <= ball_size or ball_pos[0] >= screen_width - ball_size:
-        ball_speed[0] = -ball_speed[0]
-    if ball_pos[1] <= ball_size or ball_pos[1] >= screen_height - ball_size:
-        ball_speed[1] = -ball_speed[1]
-
-    # Fill the screen with black
-    screen.fill(black)
-
-    # Draw the ball
-    pygame.draw.circle(screen, white, ball_pos, ball_size)
-
-    # Update the display
-    pygame.display.flip()
-
-    # Cap the frame rate
-    clock.tick(60)
-
-# Quit Pygame
-pygame.quit()
-sys.exit()
-        </code>
         <button class="copy-btn" onclick="copyCode()">Copy</button>
+        <code id="code-block">
+import cv2
+import numpy as np
+
+# Load the image
+image_path = "img2.jpg" # Replace with the path to your image
+img = cv2.imread(image_path)
+
+if img is not None:
+    # Convert the image to grayscale
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    # Edge detection
+    edges = cv2.Canny(gray, 100, 200) # Use Canny edge detector
+    # Texture extraction
+    kernel = np.ones((5, 5), np.float32) / 25 # Define a 5x5 averaging kernel
+    texture = cv2.filter2D(gray, -1, kernel) # Apply the averaging filter for texture extraction
+
+    # Display the original image, edges, and texture
+    cv2.imshow("Original Image", img)
+    cv2.imshow("Edges", edges)
+    cv2.imshow("Texture", texture)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+else:
+    print("Error: Unable to load the image.")
+        </code>
     </pre>
     <script>
         function copyCode() {

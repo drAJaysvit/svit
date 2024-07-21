@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bouncing Ball Animation with Pygame</title>
+    <title>Image Filtering with OpenCV and Matplotlib</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,11 +19,9 @@
         code {
             display: block;
             white-space: pre-wrap;
-            /* background: hsl(220, 80%, 90%); */
             padding: 10px;
             border-radius: 5px;
             font-size: large;
-
         }
         .copy-btn {
             position: absolute;
@@ -42,67 +40,64 @@
     </style>
 </head>
 <body>
-    <h1>Bouncing Ball Animation with Pygame</h1>
+    <h1>10.Image Filtering with OpenCV and Matplotlib</h1>
     <pre>
-        <code id="code-block">
-import pygame
-import sys
-
-# Initialize Pygame
-pygame.init()
-
-# Set up display
-screen_width = 800
-screen_height = 600
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption('Bouncing Ball Animation')
-
-# Define colors
-black = (0, 0, 0)
-white = (255, 255, 255)
-
-# Define ball properties
-ball_size = 20
-ball_pos = [screen_width // 2, screen_height // 2]
-ball_speed = [5, 5]
-
-# Clock object to control the frame rate
-clock = pygame.time.Clock()
-
-# Main loop
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    # Move the ball
-    ball_pos[0] += ball_speed[0]
-    ball_pos[1] += ball_speed[1]
-
-    # Bounce the ball off the walls
-    if ball_pos[0] <= ball_size or ball_pos[0] >= screen_width - ball_size:
-        ball_speed[0] = -ball_speed[0]
-    if ball_pos[1] <= ball_size or ball_pos[1] >= screen_height - ball_size:
-        ball_speed[1] = -ball_speed[1]
-
-    # Fill the screen with black
-    screen.fill(black)
-
-    # Draw the ball
-    pygame.draw.circle(screen, white, ball_pos, ball_size)
-
-    # Update the display
-    pygame.display.flip()
-
-    # Cap the frame rate
-    clock.tick(60)
-
-# Quit Pygame
-pygame.quit()
-sys.exit()
-        </code>
         <button class="copy-btn" onclick="copyCode()">Copy</button>
+        <code id="code-block">
+import matplotlib.pyplot as plt
+import cv2
+import numpy as np
+
+img = cv2.imread("img2.jpg", cv2.IMREAD_GRAYSCALE)
+image_array = np.array(img)
+print(image_array)
+
+def sharpen():
+    return np.array([[1, 1, 1], [1, 1, 1], [1, 1, 1]])
+
+def filtering(image, kernel):
+    m, n = kernel.shape
+    if m == n:
+        y, x = image.shape
+        y = y - m + 1  # shape of image - shape of kernel +1
+        x = x - m + 1
+        new_image = np.zeros((y, x))
+        for i in range(y):
+            for j in range(x):
+                new_image[i][j] = np.sum(image[i:i + m, j:j + m] * kernel)
+    return new_image
+
+# Display the original and sharpened images
+plt.figure(figsize=(10, 5))
+plt.subplot(1, 2, 1)
+plt.imshow(image_array, cmap='gray')
+plt.title("Original Grayscale Image")
+plt.axis("off")
+
+plt.subplot(1, 2, 2)
+plt.imshow(filtering(image_array, sharpen()), cmap='gray')
+plt.title("Blurred Image")
+plt.axis("off")
+plt.show()
+
+# Alternate solution
+# import cv2
+
+# image_path = 'img2.jpg'
+# image = cv2.imread(image_path)
+
+# average_blur = cv2.blur(image, (5, 5))
+
+# gaussian_blur = cv2.GaussianBlur(image, (5, 5), 0)
+
+# cv2.imshow('Original Image', image)
+# cv2.waitKey(0)
+# cv2.imshow('Average Blurred Image', average_blur)
+# cv2.waitKey(0)
+# cv2.imshow('Gaussian Blurred Image', gaussian_blur)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+        </code>
     </pre>
     <script>
         function copyCode() {

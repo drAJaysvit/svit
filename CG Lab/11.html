@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bouncing Ball Animation with Pygame</title>
+    <title>Contour Detection with OpenCV</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,11 +19,9 @@
         code {
             display: block;
             white-space: pre-wrap;
-            /* background: hsl(220, 80%, 90%); */
             padding: 10px;
             border-radius: 5px;
             font-size: large;
-
         }
         .copy-btn {
             position: absolute;
@@ -42,67 +40,33 @@
     </style>
 </head>
 <body>
-    <h1>Bouncing Ball Animation with Pygame</h1>
+    <h1>11.Contour Detection with OpenCV</h1>
     <pre>
-        <code id="code-block">
-import pygame
-import sys
-
-# Initialize Pygame
-pygame.init()
-
-# Set up display
-screen_width = 800
-screen_height = 600
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption('Bouncing Ball Animation')
-
-# Define colors
-black = (0, 0, 0)
-white = (255, 255, 255)
-
-# Define ball properties
-ball_size = 20
-ball_pos = [screen_width // 2, screen_height // 2]
-ball_speed = [5, 5]
-
-# Clock object to control the frame rate
-clock = pygame.time.Clock()
-
-# Main loop
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    # Move the ball
-    ball_pos[0] += ball_speed[0]
-    ball_pos[1] += ball_speed[1]
-
-    # Bounce the ball off the walls
-    if ball_pos[0] <= ball_size or ball_pos[0] >= screen_width - ball_size:
-        ball_speed[0] = -ball_speed[0]
-    if ball_pos[1] <= ball_size or ball_pos[1] >= screen_height - ball_size:
-        ball_speed[1] = -ball_speed[1]
-
-    # Fill the screen with black
-    screen.fill(black)
-
-    # Draw the ball
-    pygame.draw.circle(screen, white, ball_pos, ball_size)
-
-    # Update the display
-    pygame.display.flip()
-
-    # Cap the frame rate
-    clock.tick(60)
-
-# Quit Pygame
-pygame.quit()
-sys.exit()
-        </code>
         <button class="copy-btn" onclick="copyCode()">Copy</button>
+        <code id="code-block">
+import cv2
+import numpy as np
+
+image = cv2.imread("img3.jpg")
+cv2.imshow("Original Image", image)
+
+# Convert the image to grayscale (contours work best on binary images)
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+# Apply thresholding (you can use other techniques like Sobel edges)
+_, binary_image = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+# Find contours
+contours, _ = cv2.findContours(binary_image, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+# Draw all contours on the original image
+cv2.drawContours(image, contours, -1, (0, 255, 0), 1)
+
+# Display the result
+cv2.imshow('Contours', image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+        </code>
     </pre>
     <script>
         function copyCode() {
